@@ -1,0 +1,11 @@
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\bin\Debug\netcoreapp2.2\SocketPractice.deps.json
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\bin\Debug\netcoreapp2.2\SocketPractice.runtimeconfig.json
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\bin\Debug\netcoreapp2.2\SocketPractice.runtimeconfig.dev.json
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\bin\Debug\netcoreapp2.2\SocketPractice.dll
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\bin\Debug\netcoreapp2.2\SocketPractice.pdb
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\obj\Debug\netcoreapp2.2\SocketPractice.csprojAssemblyReference.cache
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\obj\Debug\netcoreapp2.2\SocketPractice.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\obj\Debug\netcoreapp2.2\SocketPractice.AssemblyInfoInputs.cache
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\obj\Debug\netcoreapp2.2\SocketPractice.AssemblyInfo.cs
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\obj\Debug\netcoreapp2.2\SocketPractice.dll
+C:\Users\User\Documents\Wes\Capstone\SocketPractice\SocketPractice\obj\Debug\netcoreapp2.2\SocketPractice.pdb
