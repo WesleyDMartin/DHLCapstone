@@ -97,7 +97,7 @@ if __name__ == "__main__":
     #     print("Answer        : " + setup_model(user_input))
     #     print("\n")
 
-    HOST, PORT = socket.gethostname(), 11000
+    HOST, PORT = socket.gethostname(), 11001
 
     server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
     server.serve_forever()

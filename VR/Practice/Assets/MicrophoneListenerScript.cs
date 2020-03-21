@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.Video;
 using System.Diagnostics;
+using System.Threading;
 
 [RequireComponent(typeof(AudioSource))]
 public class MicrophoneListenerScript : MonoBehaviour
@@ -65,6 +66,23 @@ public class MicrophoneListenerScript : MonoBehaviour
         //        StopRecording();
         //    }
         //}
+        if (PythonHandler.ReadyToRead)
+        {
+            bubbleText.text = PythonHandler.text;
+
+            switch (PythonHandler.text)
+            {
+                case "What are some popular tourist destinations in your country?":
+                case "What is your country's most famous bridge?":
+                    videoPlayer.clip = Resources.Load<VideoClip>("LondonBridge") as VideoClip;
+                    videoPlayer.Play();
+                    break;
+                default:
+                    videoPlayer.clip = Resources.Load<VideoClip>("default") as VideoClip;
+                    videoPlayer.Play();
+                    break;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -102,27 +120,16 @@ public class MicrophoneListenerScript : MonoBehaviour
             UnityEngine.Debug.Log($"Starting {sw.Elapsed}");
             var src = handler.StopRecording();
 
-            UnityEngine.Debug.Log($"Time to Stop recording {sw.Elapsed}");
-            var text = VoiceApiHandler.GetTextFromAudio(src);
+            //UnityEngine.Debug.Log($"Time to Stop recording {sw.Elapsed}");
+            //var text = VoiceApiHandler.GetTextFromAudio(src);
+            //bubbleText.text = text;
+            var _thread = new Thread(() => {
+                UnityEngine.Debug.Log($"Time to get text from audio {sw.Elapsed}");
+                var text = PythonHandler.GetQuestionFromText(src);
 
-            UnityEngine.Debug.Log($"Time to get text from audio {sw.Elapsed}");
-            text = PythonHandler.GetQuestionFromText(text);
-
-            UnityEngine.Debug.Log($"Time to get question from text {sw.Elapsed}");
-            bubbleText.text = text;
-
-            switch (text)
-            {
-                case "What are some popular tourist destinations in your country?":
-                case "What is your country's most famous bridge?":
-                    videoPlayer.clip = Resources.Load<VideoClip>("LondonBridge") as VideoClip;
-                    videoPlayer.Play();
-                    break;
-                default:
-                    videoPlayer.clip = Resources.Load<VideoClip>("default") as VideoClip;
-                    videoPlayer.Play();
-                    break;
-            }
+                UnityEngine.Debug.Log($"Time to get question from text {sw.Elapsed}");
+            });
+            _thread.Start();
 
 
         }

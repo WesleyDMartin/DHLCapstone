@@ -14,6 +14,8 @@ namespace Assets.Scripts
 {
     internal static class PythonHandler
     {
+        public static string text = "";
+        public static bool ReadyToRead = false;
         public static string GetQuestionFromText(string text = "")
         {
             //ProcessStartInfo start = new ProcessStartInfo();
@@ -31,7 +33,7 @@ namespace Assets.Scripts
             //        return result.Remove(result.Length-2);
             //    }
             //}
-
+            ReadyToRead = false;
             return AsynchronousClient.RequestAnswer(text);
         }
     }
@@ -108,6 +110,8 @@ namespace Assets.Scripts
                 client.Shutdown(SocketShutdown.Both);
                 client.Close();
 
+                PythonHandler.text = response;
+                PythonHandler.ReadyToRead = true;
                 return response;
             }
             catch (Exception e)
