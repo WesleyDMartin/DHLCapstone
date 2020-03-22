@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Speech;
+using System.Speech.Recognition;
 using System.Linq;
 using UnityEngine;
 using UnityScript.Lang;
@@ -18,6 +20,7 @@ public class MicrophoneHandler : MonoBehaviour
     private int count = 0;
 
     public float testSound;
+    public bool WriteDone = false;
 
     private void InitMic()
     {
@@ -72,25 +75,8 @@ public class MicrophoneHandler : MonoBehaviour
         var clip = _clipRecord;
         SavWav.Save(_filePath, clip);
         //_clipRecord = Microphone.Start(_device, true, 3, 44100);
-
+        WriteDone = true;
         return _filePath;
-    }
-
-    private float LevelMax()
-    {
-        float levelMax = 0;
-        var waveData = new float[_sampleWindow];
-        var micPosition = Microphone.GetPosition(null) - (_sampleWindow + 1);
-        if (micPosition < 0) return 0;
-
-        _clipRecord.GetData(waveData, micPosition);
-        for (var i = 0; i < _sampleWindow; ++i)
-        {
-            var wavePeak = waveData[i] * waveData[i];
-            if (levelMax < wavePeak) levelMax = wavePeak;
-        }
-
-        return levelMax;
     }
 
     private void Update()
