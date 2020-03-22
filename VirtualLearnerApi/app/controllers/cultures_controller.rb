@@ -4,7 +4,7 @@ class CulturesController < ApplicationController
   # GET /cultures
   def index
     @cultures = Culture.all
-
+    
     render json: @cultures
   end
 

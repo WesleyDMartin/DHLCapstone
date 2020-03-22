@@ -3,7 +3,14 @@ class QuestionsController < ApplicationController
 
   # GET /questions
   def index
-    @questions = Question.all
+    if params[:culture]
+      c = Culture.find_by(name: params[:culture])
+      if c
+        @questions = c.questions
+      end
+    else
+      @questions = Question.all
+    end
 
     render json: @questions
   end
@@ -46,6 +53,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def question_params
-      params.require(:question).permit(:name)
+      params.require(:question).permit(:name, :culture)
     end
 end
