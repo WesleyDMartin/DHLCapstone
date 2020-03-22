@@ -4,12 +4,14 @@ using System.Net.Http.Headers;
 
 public class CulturesAndQuestionsApi : ICulturesAndQuestionsApi
 {
-    public List<string> GetCultures()
+    private static string BASE_URL = @"https://nameless-eyrie-58237.herokuapp.com/l";
+
+    public List<Culture> GetCultures()
     {
         throw new System.NotImplementedException();
     }
 
-    public List<string> GetQuestions(string culture)
+    public List<Question> GetQuestions(Culture culture)
     {
         throw new System.NotImplementedException();
     }
