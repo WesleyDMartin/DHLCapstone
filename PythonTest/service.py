@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import re
+import requests
 import seaborn as sns
 import csv
 import sentencepiece as spm
@@ -51,6 +52,15 @@ def embed(messages):
                         input_placeholder.indices: indices,
                         input_placeholder.dense_shape: dense_shape})
 
+
+def get_cultures(culture):
+    # BASE_URL = "https://nameless-eyrie-58237.herokuapp.com/"
+    # BASE_URL = "http://192.168.0.117:3000/"
+    parameters = {"culture": "Brazillian"}
+    response = requests.get("http://192.168.0.117:3000/questions", params = parameters)
+    print(response.json())
+
+
     
 def process_to_IDs_in_sparse_format(sp, sentences):
     # An utility method that processes sentences with the sentence piece processor
@@ -81,6 +91,7 @@ def compare_questions(question, questionSet):
     return maxIndex
 
 def setup_model(nationalityQuestion):
+    get_cultures("sdfsd")
     return cultureQuestionSet[compare_questions(embed([nationalityQuestion]), cultureQuestionEmbeddingsList)]
 
 

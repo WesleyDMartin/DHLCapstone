@@ -117,8 +117,8 @@ namespace SpeechRecognizer
                     // client. Display it on the console.  
                     Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                         content.Length, content);
-
-                    Send(handler, PLATFORM == GOOGLE ? GoogleSpeechToText() : DotNetSpeechToText());
+                    content = content.Substring(0, content.Length - 5);
+                    Send(handler, PLATFORM == GOOGLE ? GoogleSpeechToText(content) : DotNetSpeechToText(content));
                 }
                 else
                 {
@@ -160,7 +160,7 @@ namespace SpeechRecognizer
             }
         }
 
-        public static string DotNetSpeechToText()
+        public static string DotNetSpeechToText(string culture)
         {
             var recognizedQuestion = string.Empty;
             using (
@@ -174,7 +174,7 @@ namespace SpeechRecognizer
                 recognizer.LoadGrammar(new DictationGrammar());
                 RecognitionResult result = recognizer.Recognize();
                 Console.WriteLine($"Recognized Question: {result.Text}");
-                recognizedQuestion = PythonHandler.GetQuestionFromText(result.Text);
+                recognizedQuestion = PythonHandler.GetQuestionFromText(culture, result.Text);
                 Console.WriteLine($" Interpreted Answer: {result.Text}");
                 // Echo the data back to the client.  
             }
@@ -182,7 +182,7 @@ namespace SpeechRecognizer
         }
 
 
-        public static string GoogleSpeechToText()
+        public static string GoogleSpeechToText(string culture)
         {
             System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
             sw.Start();
@@ -210,7 +210,7 @@ namespace SpeechRecognizer
                 }
             Console.WriteLine(text);
             Console.WriteLine($"----Time to close {sw.Elapsed}");
-            return PythonHandler.GetQuestionFromText(text);
+            return PythonHandler.GetQuestionFromText(culture, text);
         }
     }
 }

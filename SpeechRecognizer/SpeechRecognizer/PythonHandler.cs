@@ -11,7 +11,7 @@ namespace SpeechRecognizer
 {
     internal static class PythonHandler
     {
-        public static string GetQuestionFromText(string text = "")
+        public static string GetQuestionFromText(string culture, string text)
         {
             //ProcessStartInfo start = new ProcessStartInfo();
             //start.FileName = "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python37\\python.exe";
@@ -29,7 +29,7 @@ namespace SpeechRecognizer
             //    }
             //}
 
-            return AsynchronousClient.RequestAnswer(text);
+            return AsynchronousClient.RequestAnswer(culture, text);
         }
     }
     // State object for receiving data from remote device.  
@@ -58,9 +58,10 @@ namespace SpeechRecognizer
         private static ManualResetEvent receiveDone =
             new ManualResetEvent(false);
 
-        public static string RequestAnswer(string question)
+        public static string RequestAnswer(string culture, string question)
         {
-            return StartClient(question);
+            var message = culture + "|" + question;
+            return StartClient(message);
         }
 
         // The response from the remote device.  

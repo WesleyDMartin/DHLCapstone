@@ -2,7 +2,7 @@
 
 public interface ICulturesAndQuestionsApi
 {
-    List<Culture> GetCultures();
+    List<string> GetCultures();
 
-    List<Question> GetQuestions(Culture culture);
+    List<Question> GetQuestions(string culture);
 }

@@ -96,6 +96,8 @@ public class MicrophoneListenerScript : MonoBehaviour
         if (handler.IsRecording)
         {
             StopRecording();
+            CulturesAndQuestionsApi c = new CulturesAndQuestionsApi();
+            bubbleText.text = c.GetQuestions()[0].value;
         }
         else
         {
@@ -105,7 +107,7 @@ public class MicrophoneListenerScript : MonoBehaviour
 
     private void StartRecording()
     {
-        buttonText.text = "Recording"; 
+        buttonText.text = "Recording";
         handler.StartRecording();
     }
 
@@ -125,7 +127,7 @@ public class MicrophoneListenerScript : MonoBehaviour
             //bubbleText.text = text;
             var _thread = new Thread(() => {
                 UnityEngine.Debug.Log($"Time to get text from audio {sw.Elapsed}");
-                var text = PythonHandler.GetQuestionFromText(src);
+                var text = PythonHandler.GetQuestionFromText("Brazillian");
 
                 UnityEngine.Debug.Log($"Time to get question from text {sw.Elapsed}");
             });

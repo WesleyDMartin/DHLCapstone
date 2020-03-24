@@ -16,7 +16,7 @@ namespace Assets.Scripts
     {
         public static string text = "";
         public static bool ReadyToRead = false;
-        public static string GetQuestionFromText(string text = "")
+        public static string GetQuestionFromText(string culture)
         {
             //ProcessStartInfo start = new ProcessStartInfo();
             //start.FileName = "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python37\\python.exe";
@@ -34,7 +34,7 @@ namespace Assets.Scripts
             //    }
             //}
             ReadyToRead = false;
-            return AsynchronousClient.RequestAnswer(text);
+            return AsynchronousClient.RequestAnswer(culture);
         }
     }
     // State object for receiving data from remote device.  
@@ -63,9 +63,9 @@ namespace Assets.Scripts
         private static ManualResetEvent receiveDone =
             new ManualResetEvent(false);
 
-        public static string RequestAnswer(string question)
+        public static string RequestAnswer(string culture)
         {
-            return StartClient(question);
+            return StartClient(culture);
         }
 
         // The response from the remote device.  
