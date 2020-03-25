@@ -1,26 +1,6 @@
 <template>
-  <v-card
-    class="mx-auto"
-    max-width="100%"
-  >
-  
-    <v-system-bar
-      color="indigo darken-2"
-      dark
-    >
-      <v-spacer></v-spacer>
-
-      <v-icon>mdi-window-minimize</v-icon>
-
-      <v-icon>mdi-window-maximize</v-icon>
-
-      <v-icon>mdi-close</v-icon>
-    </v-system-bar>
-
-    <v-toolbar
-      color="indigo"
-      dark
-    >
+  <v-container fluid>
+    <v-toolbar color="indigo" dark>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Discover</v-toolbar-title>
@@ -34,61 +14,78 @@
 
     <v-container fluid>
       <v-row dense>
-        <v-col
-          v-for="card in cards"
-          :key="card.title"
-          :cols="card.flex"
-        >
-          <v-card>
-            
-            <v-img
-              :src="card.src"
-              class="white--text align-end"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              height="200px"
-            >
-              <v-card-title v-text="card.title"></v-card-title>
+        <v-col>
+          <v-card color="#ededed">
+            <v-img :src="cultures.src" class="white--text align-end" height="200px">
+              <v-card-title v-text="cultures.title"></v-card-title>
+              <div v-for="(item, index) in cultures.data" :key="item.id">
+                {{index + 1}}.
+                {{item.name}}
+              </div>
             </v-img>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-
-              <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-
-              <v-btn icon>
-                <v-icon>mdi-bookmark</v-icon>
-              </v-btn>
-
-              <v-btn icon>
-                <v-icon>mdi-share-variant</v-icon>
-              </v-btn>
-            </v-card-actions>
+          </v-card>
+          <v-card color="#ededed">
+            <v-img :src="questions.src" class="white--text align-end" height="200px">
+              <v-card-title v-text="questions.title"></v-card-title>
+              <div v-for="(item, index) in questions.data" :key="item.id">
+                {{index + 1}}.
+                {{item.value}}
+              </div>
+            </v-img>
+          </v-card>
+          <v-card color="#ededed">
+            <v-img :src="responses.src" class="white--text align-end" height="200px">
+              <v-card-title v-text="responses.title"></v-card-title>
+              <div v-for="(item, index) in responses.data" :key="item.id">
+                {{index + 1}}.
+                {{item.answer}}
+              </div>
+            </v-img>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
-  </v-card>
+  </v-container>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      cards: [
-
-        { title: 'Supported Culture', src: 'https://cdn.vuetifyjs.com/', flex: 4},
-        { title: 'List of Questions', src: 'https://cdn.vuetifyjs.com/', flex: 8 },
-        { title: 'Video Responses', src: 'https://cdn.vuetifyjs.com/', flex: 12 },
-      ],
-    }),
+import axios from "axios";
+export default {
+  data: () => ({
+    cultures: {
+      title: "Supported Culture",
+      src: "https://cdn.vuetifyjs.com/",
+      flex: 4,
+      data: []
+    },
+    questions: {
+      title: "List of Questions",
+      src: "https://cdn.vuetifyjs.com/",
+      flex: 8,
+      data: []
+    },
+    responses: {
+      title: "Video Responses",
+      src: "https://cdn.vuetifyjs.com/",
+      flex: 12,
+      data: []
+    }
+  }),
+  beforeMount() {
+    axios.get("http://192.168.0.117:3000/questions").then(response => {
+      this.questions.data = response.data;
+      this.responses.data = response.data;
+      axios.get("http://192.168.0.117:3000/cultures").then(response => {
+        this.cultures.data = response.data;
+      });
+    });
   }
+};
 </script>
 
 <style lang="scss" scoped>
-  title {
-    margin: 0;
-    color: red;
-  }
-
+title {
+  margin: 0;
+  color: red;
+}
 </style>
