@@ -14,41 +14,43 @@
       <v-row dense>
         <v-col>
           <v-card color="#ededed">
-            <v-img :src="cultures.src" class="white--text align-end" width="25%">
-              <v-card-title v-text="cultures.title"></v-card-title>
-            </v-img>
-              <div
-                class="question"
-                v-for="(item, index) in cultures.data"
-                :key="item.id"
-                v-on:click="updateQuestions(item.name)"
-              >{{index + 1}}. {{item.name}}</div>
-            <form v-on:submit.prevent="onSubmit">
+            <v-card-title v-text="cultures.title"></v-card-title>
+            <div class="question" v-for="(item, index) in cultures.data" :key="item.id">
+              <div v-on:click="updateQuestions(item.name)">{{index + 1}}. {{item.name}}</div>
+
+              <img
+                class="delete"
+                v-on:click="deleteCulture(item.id)"
+                :src="require('../assets/delete.png')"
+              />
+            </div>
+            <form v-on:submit.prevent="onSubmitCulture">
               <v-text-field ref="culturename" width="25%"></v-text-field>
               <button>Submit!</button>
             </form>
-
           </v-card>
           <v-card color="#ededed">
-            <v-img :src="questions.src" class="white--text align-end" height="200px">
-              <v-card-title v-text="questions.title"></v-card-title>
-              <div
-                class="question"
-                v-for="(item, index) in questions.data"
-                :key="item.id"
-                v-on:click="updateResponse(item.answer)"
-              >
+            <v-card-title v-text="questions.title"></v-card-title>
+            <div class="question" v-for="(item, index) in questions.data" :key="item.id">
+              <div v-on:click="updateResponse(item.answer)">
                 {{index + 1}}.
                 {{item.value}}
               </div>
-            </v-img>
+              <img
+                class="delete"
+                v-on:click="deleteQuestion(item.id)"
+                :src="require('../assets/delete.png')"
+              />
+            </div>
+            <form v-on:submit.prevent="onSubmitQuestion">
+              <v-text-field ref="question" width="25%" placeholder="Question"></v-text-field>
+              <v-text-field ref="answerurl" width="25%" placeholder="Video URL"></v-text-field>
+              <button>Submit!</button>
+            </form>
           </v-card>
           <v-card color="#ededed">
-            <v-img :src="responses.src" class="white--text align-end">
-              <v-card-title v-text="responses.title"></v-card-title>
-              <div class="answer">{{responses.data}}</div>
-            </v-img>
-            <youtube :video-id="O7dq_wo5eto" :player-vars="{autoplay: 1}"></youtube>
+            <v-card-title v-text="responses.title"></v-card-title>
+            <iframe width="490" height="275" :src="responses.data" frameborder="0" allowfullscreen></iframe>
           </v-card>
         </v-col>
       </v-row>
@@ -77,51 +79,81 @@ export default {
       src: "https://cdn.vuetifyjs.com/",
       flex: 12,
       data: ""
-    }
+    },
+    currentCulture: "",
+    host: "http://192.168.0.117:3000/"
   }),
   methods: {
     updateCultures() {
-      axios.get("http://192.168.0.117:3000/cultures").then(response => {
+      axios.get(this.host + "cultures").then(response => {
         this.cultures.data = response.data;
-        this.updateQuestions(this.cultures.data[0].name);
+        if (this.cultures.data[0]) {
+          this.updateQuestions(this.cultures.data[0].name);
+        } else {
+          this.questions.data = [];
+        }
+      });
+    },
+    deleteCulture(culture) {
+      axios.delete(this.host + "cultures/" + culture).then(() => {
+        this.updateCultures();
+      });
+    },
+    deleteQuestion(question) {
+      axios.delete(this.host + "questions/" + question).then(() => {
+        this.updateQuestions(this.currentCulture);
       });
     },
     updateQuestions(culture) {
-      axios
-        .get("http://192.168.0.117:3000/questions?culture=" + culture)
-        .then(response => {
-          this.questions.data = response.data;
-          if (response.data[0]) {
-            this.updateResponse(response.data[0].answer);
-          } else {
-            this.responses.data = "";
-          }
-        });
+      axios.get(this.host + "questions?culture=" + culture).then(response => {
+        this.questions.data = response.data;
+        this.questions.title =
+          "Supported Questions for the " + culture + " Culture";
+        this.currentCulture = culture;
+        if (response.data[0]) {
+          this.updateResponse(response.data[0].answer);
+        } else {
+          this.responses.data = "";
+        }
+      });
     },
     updateResponse(answer) {
-      console.log(answer);
-      this.responses.data = answer;
+      this.responses.data = answer.replace("watch?v=", "embed/");
     },
-    onSubmit() {
-      axios
-        .post("http://192.168.0.117:3000/cultures", {
-          culture: {
-            name: this.$refs.culturename.internalValue
-          }
-        })
-        .then((res) => {
-          console.log(res)
-          if (!res.data.result){
-            alert("sdfsfsf")
-          }
-          this.updateCultures();
-        });
+    onSubmitCulture() {
+      if (this.$refs.culturename.internalValue != "") {
+        axios
+          .post(this.host + "cultures", {
+            culture: {
+              name: this.$refs.culturename.internalValue
+            }
+          })
+          .then(() => {
+            this.updateCultures();
+          });
+      }
+    },
+    onSubmitQuestion() {
+      if (this.$refs.culturename.internalValue != "") {
+        axios
+          .post(this.host + "questions", {
+            question: {
+              value: this.$refs.question.internalValue,
+              answer: this.$refs.answerurl.internalValue,
+              culture: this.currentCulture
+            }
+          })
+          .then(() => {
+            this.updateQuestions(this.currentCulture);
+          });
+      }
     }
   },
   beforeMount() {
-    axios.get("http://192.168.0.117:3000/cultures").then(response => {
+    axios.get(this.host + "cultures").then(response => {
       this.cultures.data = response.data;
       this.questions.data = this.updateQuestions(response.data[0].name);
+      this.currentCulture = response.data[0].name;
     });
   }
 };
@@ -140,6 +172,11 @@ title {
 
 .answer {
   margin: 10px;
+}
+
+.delete {
+  height: 40px;
+  width: 40px;
 }
 
 // form {
