@@ -10,17 +10,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import re
+import json
 import requests
 import seaborn as sns
 import csv
 import sentencepiece as spm
 
-# Read the questions from the file.
-with open('cultureQuestions.csv', newline='') as questionsFileCSV:
-    questionReader = csv.reader(questionsFileCSV, delimiter=',', quotechar='|')
-    for cultureQuestionSet in questionReader:
-        pass
-        
+cultureQuestionEmbeddingsList = []
+culturalQuestionSet = []
+responseJsonValue = []
     
 model = hub.Module("https://tfhub.dev/google/universal-sentence-encoder-lite/2")
 
@@ -40,7 +38,7 @@ sp.Load(spm_path)
 class MyTCPHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
-        self.request.sendall(bytearray(setup_model(self.request.recv(1024).strip()), 'utf-8'))
+        self.request.sendall(bytearray(process_command(self.request.recv(1024).strip()), 'utf-8'))
 
 def embed(messages):
     values, indices, dense_shape = process_to_IDs_in_sparse_format(sp, messages)
@@ -53,12 +51,19 @@ def embed(messages):
                         input_placeholder.dense_shape: dense_shape})
 
 
-def get_cultures(culture):
+def set_culture(culture):
+    global cultureQuestionEmbeddingsList
+    global culturalQuestionSet
+    global responseJsonValue
     # BASE_URL = "https://nameless-eyrie-58237.herokuapp.com/"
     # BASE_URL = "http://192.168.0.117:3000/"
-    parameters = {"culture": "Brazillian"}
-    response = requests.get("http://192.168.0.117:3000/questions", params = parameters)
-    print(response.json())
+    parameters = {"culture": culture[:-5]}
+    response = requests.get("http://69.165.169.118:3000/questions", params = parameters)
+    culturalQuestionSet = []
+    responseJsonValue = response.json()
+    for q in responseJsonValue:
+        culturalQuestionSet.append(q["value"])
+    cultureQuestionEmbeddingsList = np.array(embed(culturalQuestionSet)).tolist()
 
 
     
@@ -90,24 +95,28 @@ def compare_questions(question, questionSet):
         i += 1
     return maxIndex
 
-def setup_model(nationalityQuestion):
-    get_cultures("sdfsd")
-    return cultureQuestionSet[compare_questions(embed([nationalityQuestion]), cultureQuestionEmbeddingsList)]
 
+def process_command(command):
+    s = command.decode()
+    print(s)
+    segs = s.split("|")
+    if segs[0] == "SETCULTURE":
+        set_culture(segs[1])
+        return "sdfsdfdsfdsfdsfsdfdsfsf"
+    else:
+        return setup_model(segs[1].encode())
+
+def setup_model(nationalityQuestion):
+    print(len(cultureQuestionEmbeddingsList))
+    match = culturalQuestionSet[compare_questions(embed([nationalityQuestion]), cultureQuestionEmbeddingsList)]
+    for q in responseJsonValue:
+        if q["value"] == match:
+            return json.dumps(q)
+    return ""
 
     
 
 if __name__ == "__main__":
-    cultureQuestionEmbeddingsList = np.array(embed(cultureQuestionSet)).tolist()
-
-    # print("\n\n\n\n\n\n\n\n\n\n\")
-    # while True:
-    #     user_input = input("Enter question: ")
-    #     if user_input == "quit":
-    #         break
-    #     print("Answer        : " + setup_model(user_input))
-    #     print("\n")
-
     HOST, PORT = socket.gethostname(), 11001
 
     server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)

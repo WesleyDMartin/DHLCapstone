@@ -11,25 +11,15 @@ namespace SpeechRecognizer
 {
     internal static class PythonHandler
     {
-        public static string GetQuestionFromText(string culture, string text)
+        public static string GetQuestionFromText(string text)
         {
-            //ProcessStartInfo start = new ProcessStartInfo();
-            //start.FileName = "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python37\\python.exe";
-            //start.Arguments = string.Format("{0} \"{1}\"", "Assets\\matchQuestion.py", text);
-            //start.UseShellExecute = false;
-            //start.RedirectStandardOutput = true;
-            //start.CreateNoWindow = true;
-            //using (Process process = Process.Start(start))
-            //{
-            //    using (StreamReader reader = process.StandardOutput)
-            //    {
-            //        string result = reader.ReadToEnd();
-            //        Console.Write(result);
-            //        return result.Remove(result.Length-2);
-            //    }
-            //}
+            return AsynchronousClient.RequestAnswer(text);
+        }
 
-            return AsynchronousClient.RequestAnswer(culture, text);
+
+        public static string SetCulture(string culture)
+        {
+            return AsynchronousClient.SetCulture(culture);
         }
     }
     // State object for receiving data from remote device.  
@@ -58,9 +48,15 @@ namespace SpeechRecognizer
         private static ManualResetEvent receiveDone =
             new ManualResetEvent(false);
 
-        public static string RequestAnswer(string culture, string question)
+        public static string RequestAnswer(string question)
         {
-            var message = culture + "|" + question;
+            var message = "GETQUESTIONS" + "|" + question;
+            return StartClient(message);
+        }
+
+        public static string SetCulture(string culture)
+        {
+            var message = "SETCULTURE" + "|" + culture;
             return StartClient(message);
         }
 
@@ -218,5 +214,7 @@ namespace SpeechRecognizer
                 Console.WriteLine(e.ToString());
             }
         }
+
+
     }
 }

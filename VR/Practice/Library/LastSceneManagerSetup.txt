@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/SampleScene.unity
+- path: Assets/LightShaft/Scenes/Demo6 - 360WorldPosition.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

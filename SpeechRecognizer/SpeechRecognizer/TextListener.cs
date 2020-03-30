@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Google.Cloud.Speech.V1;
+using Google.Cloud.TextToSpeech.V1;
+using System.Speech.Synthesis;
+using System.IO;
 
 namespace SpeechRecognizer
 {
@@ -118,7 +121,7 @@ namespace SpeechRecognizer
                     Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                         content.Length, content);
                     content = content.Substring(0, content.Length - 5);
-                    Send(handler, PLATFORM == GOOGLE ? GoogleSpeechToText(content) : DotNetSpeechToText(content));
+                    ProcessCommand(handler, content);
                 }
                 else
                 {
@@ -127,6 +130,30 @@ namespace SpeechRecognizer
                     new AsyncCallback(ReadCallback), state);
                 }
             }
+        }
+
+
+        private static void ProcessCommand(Socket handler, string message)
+        {
+            var GET_QUESTIONS = "GETQUESTIONS";
+            var SET_CULTURE = "SETCULTURE";
+            var SPEAK = "SPEAK";
+            var messageSegments = message.Split('|');
+            var command = messageSegments[0];
+
+            if (command == GET_QUESTIONS)
+            {
+                Send(handler, PLATFORM == GOOGLE ? GoogleSpeechToText() : DotNetSpeechToText());
+            }
+            else if (command == SPEAK)
+            {
+                Send(handler, PLATFORM == GOOGLE ? GoogleTextToSpeech(messageSegments[1]) : DotNetTextToSpeech(messageSegments[1]));
+            }
+            else
+            {
+                Send(handler, PythonHandler.SetCulture(messageSegments[1]));
+            }
+
         }
 
         private static void Send(Socket handler, String data)
@@ -160,7 +187,7 @@ namespace SpeechRecognizer
             }
         }
 
-        public static string DotNetSpeechToText(string culture)
+        public static string DotNetSpeechToText()
         {
             var recognizedQuestion = string.Empty;
             using (
@@ -174,7 +201,7 @@ namespace SpeechRecognizer
                 recognizer.LoadGrammar(new DictationGrammar());
                 RecognitionResult result = recognizer.Recognize();
                 Console.WriteLine($"Recognized Question: {result.Text}");
-                recognizedQuestion = PythonHandler.GetQuestionFromText(culture, result.Text);
+                recognizedQuestion = PythonHandler.GetQuestionFromText(result.Text);
                 Console.WriteLine($" Interpreted Answer: {result.Text}");
                 // Echo the data back to the client.  
             }
@@ -182,7 +209,7 @@ namespace SpeechRecognizer
         }
 
 
-        public static string GoogleSpeechToText(string culture)
+        public static string GoogleSpeechToText()
         {
             System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
             sw.Start();
@@ -210,7 +237,46 @@ namespace SpeechRecognizer
                 }
             Console.WriteLine(text);
             Console.WriteLine($"----Time to close {sw.Elapsed}");
-            return PythonHandler.GetQuestionFromText(culture, text);
+            return PythonHandler.GetQuestionFromText(text);
+        }
+
+        public static string DotNetTextToSpeech(string text)
+        {
+            var synth = new SpeechSynthesizer();
+
+            synth.SetOutputToWaveFile("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav");
+            synth.SelectVoice("Microsoft Zira Desktop");
+            synth.Speak(text);
+
+            return "C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav";
+        }
+
+        public static string GoogleTextToSpeech(string text)
+        {
+            TextToSpeechClient client = TextToSpeechClient.Create();
+            var response = client.SynthesizeSpeech(new SynthesizeSpeechRequest
+            {
+                Input = new SynthesisInput
+                {
+                    Text = text
+                },
+                // Note: voices can also be specified by name
+                Voice = new VoiceSelectionParams
+                {
+                    LanguageCode = "en-US",
+                    SsmlGender = SsmlVoiceGender.Female
+                },
+                AudioConfig = new AudioConfig
+                {
+                    AudioEncoding = AudioEncoding.Linear16
+                }
+            });
+
+            using (Stream output = File.Create("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav"))
+            {
+                response.AudioContent.WriteTo(output);
+            }
+            return "C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav";
         }
     }
 }
