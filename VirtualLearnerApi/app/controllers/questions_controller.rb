@@ -22,18 +22,14 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   def create
-    @question = Question.new(value: params[:question][:value], answer: params[:question][:answer])
-    @question.cultures << Culture.find_by(name: params[:question][:culture])
+    c = Culture.find_by(name: params[:question][:culture])
+    q = params[:question]
+    @question = Question.new(value: q[:value], answer: q[:answer], text_answer: q[:text_answer], videotype: q[:videotype])
+    Culture.find_by(name: q[:culture]).questions << @question
     if @question.save
       render json: @question, status: :created, location: @question    
     # Delete this part?
     else
-      q = Question.find_by(value: params[:question][:value])
-      if q
-        q.cultures << Culture.find_by(name: params[:question][:culture])
-        render json: @question, status: :created, location: @question
-        return
-      end
       render json: @question.errors, status: :unprocessable_entity
     end
   end
@@ -60,6 +56,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def question_params
-      params.require(:question).permit(:value, :answer, :culture)
+      params.require(:question).permit(:value, :answer, :text_answer, :culture)
     end
 end

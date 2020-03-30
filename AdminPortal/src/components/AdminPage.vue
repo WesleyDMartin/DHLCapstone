@@ -32,7 +32,7 @@
           <v-card color="#ededed">
             <v-card-title v-text="questions.title"></v-card-title>
             <div class="question" v-for="(item, index) in questions.data" :key="item.id">
-              <div v-on:click="updateResponse(item.answer)">
+              <div v-on:click="updateResponse(item)">
                 {{index + 1}}.
                 {{item.value}}
               </div>
@@ -44,13 +44,31 @@
             </div>
             <form v-on:submit.prevent="onSubmitQuestion">
               <v-text-field ref="question" width="25%" placeholder="Question"></v-text-field>
+              <v-text-field ref="text_answer" width="25%" placeholder="Text Answer"></v-text-field>
               <v-text-field ref="answerurl" width="25%" placeholder="Video URL"></v-text-field>
+              <v-card-text>
+                What type of youtube video is this?
+                <br />
+                <v-radio-group v-model="videotype" :mandatory="true">
+                  <v-radio value="standard" label="Standard" />
+                  <br />
+                  <v-radio value="threesixty" label="360" />
+                  <br />
+                </v-radio-group>
+              </v-card-text>
               <button>Submit!</button>
             </form>
           </v-card>
           <v-card color="#ededed">
             <v-card-title v-text="responses.title"></v-card-title>
-            <iframe width="490" height="275" :src="responses.data" frameborder="0" allowfullscreen></iframe>
+            <v-card-text>Response: {{responses.data.text}}</v-card-text>
+            <iframe
+              width="490"
+              height="275"
+              :src="responses.data.url"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
           </v-card>
         </v-col>
       </v-row>
@@ -75,13 +93,14 @@ export default {
       data: []
     },
     responses: {
-      title: "Video Responses",
+      title: "Answer",
       src: "https://cdn.vuetifyjs.com/",
       flex: 12,
-      data: ""
+      data: {}
     },
     currentCulture: "",
-    host: "http://192.168.0.117:3000/"
+    host: "http://69.165.169.118:3000/",
+    videotype: ""
   }),
   methods: {
     updateCultures() {
@@ -111,14 +130,17 @@ export default {
           "Supported Questions for the " + culture + " Culture";
         this.currentCulture = culture;
         if (response.data[0]) {
-          this.updateResponse(response.data[0].answer);
+          this.updateResponse(response.data[0]);
         } else {
-          this.responses.data = "";
+          this.responses.data = {};
         }
       });
     },
     updateResponse(answer) {
-      this.responses.data = answer.replace("watch?v=", "embed/");
+      this.responses.data = {
+        url: answer.answer.replace("watch?v=", "embed/"),
+        text: answer.text_answer
+      };
     },
     onSubmitCulture() {
       if (this.$refs.culturename.internalValue != "") {
@@ -140,6 +162,8 @@ export default {
             question: {
               value: this.$refs.question.internalValue,
               answer: this.$refs.answerurl.internalValue,
+              text_answer: this.$refs.text_answer.internalValue,
+              videotype: this.videotype,
               culture: this.currentCulture
             }
           })

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_27_143407) do
+ActiveRecord::Schema.define(version: 2020_03_30_170508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,14 +24,19 @@ ActiveRecord::Schema.define(version: 2020_03_27_143407) do
   create_table "cultures_questions", id: false, force: :cascade do |t|
     t.bigint "question_id", null: false
     t.bigint "culture_id", null: false
-    t.index ["question_id", "culture_id"], name: "index_cultures_questions_on_question_id_and_culture_id", unique: true
+    t.index ["culture_id", "question_id"], name: "index_cultures_questions_on_culture_id_and_question_id"
+    t.index ["question_id", "culture_id"], name: "index_cultures_questions_on_question_id_and_culture_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string "value"
     t.string "answer"
+    t.string "text_answer"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "culture_id"
+    t.string "videotype"
+    t.index ["culture_id"], name: "index_questions_on_culture_id"
   end
 
 end

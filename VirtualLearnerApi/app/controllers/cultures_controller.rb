@@ -35,6 +35,9 @@ class CulturesController < ApplicationController
 
   # DELETE /cultures/1
   def destroy
+    @culture.questions do |q|
+      q.destroy
+    end
     @culture.destroy
   end
 
