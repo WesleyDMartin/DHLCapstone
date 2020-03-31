@@ -1,11 +1,12 @@
 /target:library
 /nowarn:0169
-/out:Temp/Oculus.VR.dll
+/out:Temp/Assembly-CSharp-Editor.dll
 /debug:portable
 /optimize-
 /nostdlib+
 /preferreduilang:en-US
 /langversion:latest
+/reference:Library/ScriptAssemblies/Assembly-CSharp.dll
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.ARModule.dll"
@@ -66,8 +67,21 @@
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/Managed/UnityEditor.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/Managed/Unity.Locator.dll"
+/reference:Library/ScriptAssemblies/Unity.Timeline.Editor.dll
+/reference:Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
+/reference:Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
+/reference:Library/ScriptAssemblies/Unity.Timeline.dll
+/reference:Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll
+/reference:Library/ScriptAssemblies/Oculus.VR.Editor.dll
+/reference:Library/ScriptAssemblies/Oculus.VR.Scripts.Editor.dll
+/reference:Library/ScriptAssemblies/Oculus.VR.dll
+/reference:Library/ScriptAssemblies/Unity.TextMeshPro.dll
+/reference:Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.1.2f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll"
@@ -317,70 +331,33 @@
 /define:ENABLE_VSTU
 /define:CSHARP_7_OR_LATER
 /define:CSHARP_7_3_OR_NEWER
-Assets\Oculus\VR\Scripts\Composition\OVRCameraComposition.cs
-Assets\Oculus\VR\Scripts\Composition\OVRComposition.cs
-Assets\Oculus\VR\Scripts\Composition\OVRCompositionUtil.cs
-Assets\Oculus\VR\Scripts\Composition\OVRDirectComposition.cs
-Assets\Oculus\VR\Scripts\Composition\OVRExternalComposition.cs
-Assets\Oculus\VR\Scripts\Composition\OVRSandwichComposition.cs
-Assets\Oculus\VR\Scripts\OVRBoundary.cs
-Assets\Oculus\VR\Scripts\OVRCameraRig.cs
-Assets\Oculus\VR\Scripts\OVRCommon.cs
-Assets\Oculus\VR\Scripts\OVRDebugHeadController.cs
-Assets\Oculus\VR\Scripts\OVRDisplay.cs
-Assets\Oculus\VR\Scripts\OVRHaptics.cs
-Assets\Oculus\VR\Scripts\OVRHapticsClip.cs
-Assets\Oculus\VR\Scripts\OVRHeadsetEmulator.cs
-Assets\Oculus\VR\Scripts\OVRInput.cs
-Assets\Oculus\VR\Scripts\OVRLayerAttribute.cs
-Assets\Oculus\VR\Scripts\OVRManager.cs
-Assets\Oculus\VR\Scripts\OVRMixedReality.cs
-Assets\Oculus\VR\Scripts\OVROnCompleteListener.cs
-Assets\Oculus\VR\Scripts\OVROverlay.cs
-Assets\Oculus\VR\Scripts\OVRPlatformMenu.cs
-Assets\Oculus\VR\Scripts\OVRPlugin.cs
-Assets\Oculus\VR\Scripts\OVRProfile.cs
-Assets\Oculus\VR\Scripts\OVRResources.cs
-Assets\Oculus\VR\Scripts\OVRSceneLoader.cs
-Assets\Oculus\VR\Scripts\OVRTracker.cs
-Assets\Oculus\VR\Scripts\OVRXRSDKNative.cs
-Assets\Oculus\VR\Scripts\Util\OVRAudioSourceTest.cs
-Assets\Oculus\VR\Scripts\Util\OVRAutoDestroyInMRC.cs
-Assets\Oculus\VR\Scripts\Util\OVRChromaticAberration.cs
-Assets\Oculus\VR\Scripts\Util\OVRControllerHelper.cs
-Assets\Oculus\VR\Scripts\Util\OVRCubemapCapture.cs
-Assets\Oculus\VR\Scripts\Util\OVRCursor.cs
-Assets\Oculus\VR\Scripts\Util\OVRCustomSkeleton.cs
-Assets\Oculus\VR\Scripts\Util\OVRDebugInfo.cs
-Assets\Oculus\VR\Scripts\Util\OVRGazePointer.cs
-Assets\Oculus\VR\Scripts\Util\OVRGearVrControllerTest.cs
-Assets\Oculus\VR\Scripts\Util\OVRGrabbable.cs
-Assets\Oculus\VR\Scripts\Util\OVRGrabber.cs
-Assets\Oculus\VR\Scripts\Util\OVRGridCube.cs
-Assets\Oculus\VR\Scripts\Util\OVRHand.cs
-Assets\Oculus\VR\Scripts\Util\OVRHandTest.cs
-Assets\Oculus\VR\Scripts\Util\OVRInputModule.cs
-Assets\Oculus\VR\Scripts\Util\OVRMesh.cs
-Assets\Oculus\VR\Scripts\Util\OVRMeshRenderer.cs
-Assets\Oculus\VR\Scripts\Util\OVRMixedRealityCaptureSettings.cs
-Assets\Oculus\VR\Scripts\Util\OVRMixedRealityCaptureTest.cs
-Assets\Oculus\VR\Scripts\Util\OVRModeParms.cs
-Assets\Oculus\VR\Scripts\Util\OVRMonoscopic.cs
-Assets\Oculus\VR\Scripts\Util\OVRNetwork.cs
-Assets\Oculus\VR\Scripts\Util\OVRPhysicsRaycaster.cs
-Assets\Oculus\VR\Scripts\Util\OVRPlayerController.cs
-Assets\Oculus\VR\Scripts\Util\OVRPointerEventData.cs
-Assets\Oculus\VR\Scripts\Util\OVRProfiler.cs
-Assets\Oculus\VR\Scripts\Util\OVRProgressIndicator.cs
-Assets\Oculus\VR\Scripts\Util\OVRRaycaster.cs
-Assets\Oculus\VR\Scripts\Util\OVRRecord.cs
-Assets\Oculus\VR\Scripts\Util\OVRResetOrientation.cs
-Assets\Oculus\VR\Scripts\Util\OVRSceneSampleController.cs
-Assets\Oculus\VR\Scripts\Util\OVRScreenFade.cs
-Assets\Oculus\VR\Scripts\Util\OVRSkeleton.cs
-Assets\Oculus\VR\Scripts\Util\OVRSkeletonRenderer.cs
-Assets\Oculus\VR\Scripts\Util\OVRSystemPerfMetrics.cs
-Assets\Oculus\VR\Scripts\Util\OVRWaitCursor.cs
-Assets\Oculus\VR\ThirdParty\openvr_api.cs
-Assets\Oculus\VR\ThirdParty\SimpleJSON.cs
-Assets\Oculus\VR\ThirdParty\SimpleJSONUnity.cs
+Assets\LightShaft\CustomScripts\Editor\InvertedSphere.cs
+Assets\LightShaft\Scripts\VideoController\Editor\DrawIfPropertyDrawer.cs
+Assets\LightShaft\Scripts\VideoController\Editor\YoutubeAddPlayerToSceneEditor.cs
+Assets\Oculus\AudioManager\Scripts\Audio\Editor\AudioImportPostProcessor.cs
+Assets\Oculus\AudioManager\Scripts\Audio\Editor\AudioManagerInspector.cs
+Assets\Oculus\AudioManager\Scripts\Audio\Editor\MinMaxPropertyDrawer.cs
+Assets\Oculus\AudioManager\Scripts\Audio\Editor\MixerSnapshotPropertyDrawer.cs
+Assets\Oculus\AudioManager\Scripts\Audio\Editor\OSPPropsPropertyDrawer.cs
+Assets\Oculus\AudioManager\Scripts\Audio\Editor\SoundFXPropertyDrawer.cs
+Assets\Oculus\AudioManager\Scripts\Audio\Editor\SoundFXRefPropertyDrawer.cs
+Assets\Oculus\AudioManager\Scripts\Utils\Editor\DrawerInspectorNote.cs
+Assets\Oculus\LipSync\Editor\OVRLipSyncBuildPostProcessor.cs
+Assets\Oculus\LipSync\Editor\OVRLipSyncContextMorphTargetEditor.cs
+Assets\Oculus\LipSync\Editor\OVRLipSyncTool.cs
+Assets\Oculus\LipSync\Editor\OVRNamedArrayPropertyDrawer.cs
+Assets\Oculus\Platform\Editor\GUIHelper.cs
+Assets\Oculus\Platform\Editor\OculusPlatformSettingsEditor.cs
+Assets\Oculus\Platform\Editor\OculusPluginUpdaterStub.cs
+Assets\Oculus\Platform\Editor\OculusStandalonePlatformResponse.cs
+Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\Editor\TeleportTransitionWarpInspector.cs
+Assets\Oculus\SampleFramework\Core\Video\Editor\AndroidVideoEditorUtil.cs
+Assets\Oculus\SampleFramework\Editor\BuildAssetPackages.cs
+Assets\Oculus\SampleFramework\Editor\OculusSampleFrameworkUtil.cs
+Assets\Oculus\Spatializer\editor\ONSPAudioPluginUpdater.cs
+Assets\Oculus\Spatializer\editor\ONSPAudioPluginUpdaterStub.cs
+Assets\Oculus\Spatializer\editor\ONSPAudioSourceEditor.cs
+Assets\Oculus\Spatializer\editor\ONSPPropagationGeometryEditor.cs
+Assets\Oculus\Spatializer\editor\ONSPPropagationMaterialEditor.cs
+Assets\Oculus\Spatializer\editor\ONSPPropagationSerializationManager.cs
+Assets\Oculus\Spatializer\editor\ONSPReflectionCustomGUI.cs

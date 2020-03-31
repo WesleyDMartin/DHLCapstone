@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -15,6 +16,9 @@ public class NarratorHandler : MonoBehaviour
     private List<string> cultures;
     private ICulturesAndQuestionsApi api;
     private bool playing = false;
+    public delegate void DonePlayingEventHandler();
+    public event DonePlayingEventHandler DonePlayingEvent;
+
 
     private int audioLength = 0;
     // Start is called before the first frame update
@@ -47,7 +51,7 @@ public class NarratorHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(speakDelay);
 
-        ShowBubble(text, bubbleDelay + speakDelay + audioLength);
+        ShowBubble(text, bubbleDelay + speakDelay);
         Thread _thread = new Thread(() =>
         {
             CommandInterpreter.TextToSpeech(text);
@@ -77,6 +81,8 @@ public class NarratorHandler : MonoBehaviour
     {
         if (source.clip != null && source.clip.isReadyToPlay && CommandInterpreter.ReadyToSpeak)
         {
+            StartCoroutine(DonePlaying(source.clip.length));
+            Debug.Log(source.clip.length);
             Debug.Log("playing");
             source.Play();
             playing = true;
@@ -102,5 +108,14 @@ public class NarratorHandler : MonoBehaviour
             source.clip = audioLoader.GetAudioClip(false, false, AudioType.WAV);
             audioLength = (int)source.clip.length;
         }
+    }
+
+
+    public IEnumerator DonePlaying(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        Debug.Log("Invoked");
+        DonePlayingEvent?.Invoke();
     }
 }

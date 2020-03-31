@@ -59,23 +59,24 @@ public class MicrophoneListenerScript : MonoBehaviour
     {
         OVRInput.Update();
 
-        if (OVRInput.Get(OVRInput.Button.One))
-        {
-            UnityEngine.Debug.Log("Button Pressed");
-            if (!handler.IsRecording)
-            {
-                StartRecording();
-            }
-        }
-        else
-        {
-            if (handler.IsRecording)
-            {
-                StopRecording();
-            }
-        }
+        //if (OVRInput.Get(OVRInput.Button.One))
+        //{
+        //    UnityEngine.Debug.Log("Button Pressed");
+        //    if (!handler.IsRecording)
+        //    {
+        //        StartRecording();
+        //    }
+        //}
+        //else
+        //{
+        //    if (handler.IsRecording)
+        //    {
+        //        StopRecording();
+        //    }
+        //}
         if (CommandInterpreter.ReadyToRead)
         {
+            bool isSpokenAnswer = false;
             CommandInterpreter.ReadyToRead = false;
             bubbleText.text = CommandInterpreter.Response.text_answer;
 
@@ -86,7 +87,18 @@ public class MicrophoneListenerScript : MonoBehaviour
             }
             else
             {
-                StartCoroutine(narrator.Speak(CommandInterpreter.Response.text_answer));
+                if (CommandInterpreter.Response.text_answer != null && CommandInterpreter.Response.text_answer != string.Empty)
+                {
+                    narrator.DonePlayingEvent += new NarratorHandler.DonePlayingEventHandler(raiseVolume);
+                    StartCoroutine(narrator.Speak(CommandInterpreter.Response.text_answer, 3, 15));
+                    threeSixtyPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)0.1;
+                    standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)0.1;
+                }
+                else
+                {
+                    threeSixtyPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
+                    standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
+                }
 
                 switch (CommandInterpreter.Response.videotype)
                 {
@@ -187,5 +199,13 @@ public class MicrophoneListenerScript : MonoBehaviour
         UnityEngine.Debug.Log($"Ending {sw.Elapsed}");
         sw.Stop();
         goAudioSource.Play();
+    }
+
+    private void raiseVolume()
+    {
+        UnityEngine.Debug.Log("Called");
+        threeSixtyPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
+        standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
+        narrator.DonePlayingEvent -= new NarratorHandler.DonePlayingEventHandler(raiseVolume);
     }
 }

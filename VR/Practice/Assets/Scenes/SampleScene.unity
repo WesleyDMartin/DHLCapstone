@@ -422,6 +422,11 @@ PrefabInstance:
       propertyPath: autoPlayOnStart
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 5d410f561f4a06c4f93067d94dc545ce,
+        type: 3}
+      propertyPath: audioPlayer
+      value: 
+      objectReference: {fileID: 2117645233}
     - target: {fileID: 1348297416665978, guid: 5d410f561f4a06c4f93067d94dc545ce, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1492,6 +1497,11 @@ PrefabInstance:
       propertyPath: audioPlayer
       value: 
       objectReference: {fileID: 1149895333}
+    - target: {fileID: 82942880754542664, guid: afcb2c04ccaaed1478594f9f88e45133,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afcb2c04ccaaed1478594f9f88e45133, type: 3}
 --- !u!1 &1002279436
