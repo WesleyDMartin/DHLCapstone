@@ -154,6 +154,7 @@ export default {
             this.updateCultures();
           });
       }
+          this.$refs.culturename.internalValue = "";
     },
     onSubmitQuestion() {
       if (this.$refs.culturename.internalValue != "") {
@@ -171,6 +172,9 @@ export default {
             this.updateQuestions(this.currentCulture);
           });
       }
+      this.$refs.question.internalValue="";
+      this.$refs.text_answer.internalValue="";
+      this.$refs.answerurl.internalValue="";
     }
   },
   beforeMount() {
