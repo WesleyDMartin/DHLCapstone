@@ -21,13 +21,6 @@ ActiveRecord::Schema.define(version: 2020_03_30_170508) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "cultures_questions", id: false, force: :cascade do |t|
-    t.bigint "question_id", null: false
-    t.bigint "culture_id", null: false
-    t.index ["culture_id", "question_id"], name: "index_cultures_questions_on_culture_id_and_question_id"
-    t.index ["question_id", "culture_id"], name: "index_cultures_questions_on_question_id_and_culture_id"
-  end
-
   create_table "questions", force: :cascade do |t|
     t.string "value"
     t.string "answer"

@@ -99,7 +99,7 @@ export default {
       data: {}
     },
     currentCulture: "",
-    host: "http://69.165.169.118:3000/",
+    host: "http://138.197.146.4:3000/",
     videotype: ""
   }),
   methods: {
