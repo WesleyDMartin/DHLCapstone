@@ -20,30 +20,34 @@ namespace Assets.Scripts
         public string text_answer;
         public string videotype;
     }
+    public enum ErrorType
+    {
+        NO_ERROR,
+        NO_WORDS,
+        NO_QUESTION
+    }
     internal static class CommandInterpreter
     {
         public static Response Response;
         public static bool ReadyToRead = false;
         public static bool ReadyToSpeak = false;
+        public static ErrorType Error = ErrorType.NO_ERROR;
         public static string GetQuestionFromText(string culture)
         {
-            //ProcessStartInfo start = new ProcessStartInfo();
-            //start.FileName = "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python37\\python.exe";
-            //start.Arguments = string.Format("{0} \"{1}\"", "Assets\\matchQuestion.py", text);
-            //start.UseShellExecute = false;
-            //start.RedirectStandardOutput = true;
-            //start.CreateNoWindow = true;
-            //using (Process process = Process.Start(start))
-            //{
-            //    using (StreamReader reader = process.StandardOutput)
-            //    {
-            //        string result = reader.ReadToEnd();
-            //        Console.Write(result);
-            //        return result.Remove(result.Length-2);
-            //    }
-            //}
             ReadyToRead = false;
             var ret =  AsynchronousClient.RequestAnswer("GETQUESTIONS|" + culture);
+            if (ret == "NO_WORDS")
+            {
+                Error = ErrorType.NO_WORDS;
+            }
+            else if (ret == "NO_QUESTION")
+            {
+                Error = ErrorType.NO_QUESTION;
+            }
+            else
+            {
+                Error = ErrorType.NO_ERROR;
+            }
             ReadyToRead = true;
             return ret;
         }
@@ -139,7 +143,7 @@ namespace Assets.Scripts
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-                return e.Message;
+                return response;
             }
         }
 

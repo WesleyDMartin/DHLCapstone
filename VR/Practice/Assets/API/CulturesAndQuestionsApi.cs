@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 public class CulturesAndQuestionsApi : ICulturesAndQuestionsApi
 {
     //private static string BASE_URL = @"https://nameless-eyrie-58237.herokuapp.com/";
-    private static string BASE_URL = @"http://192.168.0.117:3000/";
+    private static string BASE_URL = @"http://138.197.146.4:3000/";
 
     public List<string> GetCultures()
     {

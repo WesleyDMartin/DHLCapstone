@@ -58,7 +58,7 @@ def set_culture(culture):
     # BASE_URL = "https://nameless-eyrie-58237.herokuapp.com/"
     # BASE_URL = "http://192.168.0.117:3000/"
     parameters = {"culture": culture[:-5]}
-    response = requests.get("http://69.165.169.118:3000/questions", params = parameters)
+    response = requests.get("http://138.197.146.4:3000/questions", params = parameters)
     culturalQuestionSet = []
     responseJsonValue = response.json()
     for q in responseJsonValue:
@@ -86,10 +86,12 @@ def process_to_IDs_in_sparse_format(sp, sentences):
 def compare_questions(question, questionSet):
     i = 0
     maxMatch = 0
-    maxIndex = 0
+    maxIndex = -1
     for q in questionSet:
         matchStrength = np.inner(question, q)
-        if matchStrength > maxMatch: 
+        print(culturalQuestionSet[i], flush=True)
+        print(matchStrength, flush=True)
+        if matchStrength > maxMatch and matchStrength > 0.4: 
             maxMatch = matchStrength
             maxIndex = i
         i += 1
@@ -98,7 +100,7 @@ def compare_questions(question, questionSet):
 
 def process_command(command):
     s = command.decode()
-    print(s)
+    print(s, flush=True)
     segs = s.split("|")
     if segs[0] == "SETCULTURE":
         set_culture(segs[1])
@@ -107,12 +109,16 @@ def process_command(command):
         return setup_model(segs[1].encode())
 
 def setup_model(nationalityQuestion):
-    print(len(cultureQuestionEmbeddingsList))
-    match = culturalQuestionSet[compare_questions(embed([nationalityQuestion]), cultureQuestionEmbeddingsList)]
+    print(len(cultureQuestionEmbeddingsList), flush=True)
+    match_index = compare_questions(embed([nationalityQuestion]), cultureQuestionEmbeddingsList)
+    if match_index == -1:
+        return "NO_MATCH"
+		
+    match = culturalQuestionSet[match_index]
     for q in responseJsonValue:
         if q["value"] == match:
             return json.dumps(q)
-    return ""
+    return "NO_MATCH"
 
     
 

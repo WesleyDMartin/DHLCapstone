@@ -31,16 +31,16 @@ public class NarratorHandler : MonoBehaviour
         bubbleText.transform.localScale = new Vector3(0, 0, 0);
         bubble.transform.localScale = new Vector3(0, 0, 0);
 
-        if (PopulateCulturesDropdown.cultures.Count == 1)
+        if (CultureManager.cultures.Count == 1)
         {
             StartCoroutine(Speak($"Welcome to the Digital Human Library virtual learning platform. " +
-                $"Today we are going to learn about the {PopulateCulturesDropdown.cultures[0]} culture. Go ahead and ask a question," +
-                "and we will see if we can answer it for you!", 3, 10));
+                $"Today we are going to learn about the {CultureManager.cultures[0]} culture. Go ahead and ask a question," +
+                "and we will see if we can answer it for you!", 3, 6));
         }
         else
         {
             StartCoroutine(Speak("Welcome to the Digital Human Library virtual learning platform. " +
-                "Please select a culture about which you would like to learn", 3, 10));
+                "Please select a culture about which you would like to learn", 3, 6));
         }
     }
 

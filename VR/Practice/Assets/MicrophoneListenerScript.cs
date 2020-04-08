@@ -38,11 +38,11 @@ public class MicrophoneListenerScript : MonoBehaviour
     private int quietCount;
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         threeSixtyPlayer = GameObject.Find("Youtube360Player").GetComponent<YoutubePlayer>();
         standardPlayer = GameObject.Find("YoutubeAdvanced").GetComponent<YoutubePlayer>();
-        button = GameObject.Find("Button").GetComponent<Button>();
+        button = GameObject.Find("RecordButton").GetComponent<Button>();
         
         button.onClick.AddListener(ClickHandler);
         bubbleText = GameObject.Find("TextBubble").GetComponent<Text>();
@@ -50,101 +50,100 @@ public class MicrophoneListenerScript : MonoBehaviour
         goAudioSource = transform.GetComponent<AudioSource>();
         handler = transform.GetComponent<MicrophoneHandler>();
         narrator = GameObject.FindObjectOfType<NarratorHandler>();
-        standardScale = standardPlayer.transform.localScale;
-        threeSixtyScale = threeSixtyPlayer.transform.localScale;
+        standardPlayer.gameObject.SetActive(false);
+        threeSixtyPlayer.gameObject.SetActive(false);
+        //threeSixtyPlayer.Play(@"https://www.youtube.com/watch?v=OaH_I-c0UbY");
+        //threeSixtyPlayer.Seek(111);
+        //threeSixtyPlayer.Pause();
+
     }
 
     // Update is called once per frame
     private void Update()
     {
-        OVRInput.Update();
-
-        //if (OVRInput.Get(OVRInput.Button.One))
-        //{
-        //    UnityEngine.Debug.Log("Button Pressed");
-        //    if (!handler.IsRecording)
-        //    {
-        //        StartRecording();
-        //    }
-        //}
-        //else
-        //{
-        //    if (handler.IsRecording)
-        //    {
-        //        StopRecording();
-        //    }
-        //}
+        if (OVRInput.Get(OVRInput.Button.Two))
+        {
+            UnityEngine.Debug.Log("Button Pressed");
+            if (!handler.IsRecording)
+            {
+                StartRecording();
+            }
+        }
+        else
+        {
+            if (handler.IsRecording)
+            {
+                StopRecording();
+            }
+        }
         if (CommandInterpreter.ReadyToRead)
         {
-            bool isSpokenAnswer = false;
-            CommandInterpreter.ReadyToRead = false;
-            bubbleText.text = CommandInterpreter.Response.text_answer;
-
-
-            if (CommandInterpreter.Response.answer == null || CommandInterpreter.Response.answer == string.Empty)
+            switch (CommandInterpreter.Error)
             {
-                threeSixtyPlayer.Stop();
-            }
-            else
-            {
-                if (CommandInterpreter.Response.text_answer != null && CommandInterpreter.Response.text_answer != string.Empty)
-                {
-                    narrator.DonePlayingEvent += new NarratorHandler.DonePlayingEventHandler(raiseVolume);
-                    StartCoroutine(narrator.Speak(CommandInterpreter.Response.text_answer, 3, 15));
-                    threeSixtyPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)0.1;
-                    standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)0.1;
-                }
-                else
-                {
-                    threeSixtyPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
-                    standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
-                }
+                
+                case ErrorType.NO_WORDS:
+                    StartCoroutine(narrator.Speak("Sorry, I didn't quite catch that, " +
+                        "please try asking your question again"));
+                    break;
+                case ErrorType.NO_QUESTION:
+                    StartCoroutine(narrator.Speak("Sorry, I don't know how to answer that!"));
+                    break;
+                case ErrorType.NO_ERROR:
 
-                switch (CommandInterpreter.Response.videotype)
-                {
-                    case "threesixty":
-                        standardPlayer.Stop();
-                        standardPlayer.transform.localScale = new Vector3(0, 0, 0);
-                        threeSixtyPlayer.transform.localScale = threeSixtyScale;
-                        threeSixtyPlayer.Play(CommandInterpreter.Response.answer);
-                        break;
+                    bool isSpokenAnswer = false;
+                    CommandInterpreter.ReadyToRead = false;
 
-                    case "standard":
+
+                    if (CommandInterpreter.Response == null || CommandInterpreter.Response.answer == string.Empty)
+                    {
                         threeSixtyPlayer.Stop();
-                        threeSixtyPlayer.transform.localScale = new Vector3(0, 0, 0);
-                        standardPlayer.transform.localScale = standardScale;
-                        standardPlayer.Play(CommandInterpreter.Response.answer);
-                        break;
-
-                    default:
                         standardPlayer.Stop();
-                        standardPlayer.transform.localScale = new Vector3(0, 0, 0);
-                        threeSixtyPlayer.transform.localScale = threeSixtyScale;
-                        threeSixtyPlayer.Play(CommandInterpreter.Response.answer);
-                        break;
-                }
+                    }
+                    else
+                    {
+                        if (CommandInterpreter.Response.text_answer != null && CommandInterpreter.Response.text_answer != string.Empty)
+                        {
+                            narrator.DonePlayingEvent += new NarratorHandler.DonePlayingEventHandler(raiseVolume);
+                            StartCoroutine(narrator.Speak(CommandInterpreter.Response.text_answer, 3, 8));
+                            threeSixtyPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)0.1;
+                            standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)0.1;
+                        }
+                        else
+                        {
+                            threeSixtyPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
+                            standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
+                        }
+
+                        switch (CommandInterpreter.Response.videotype)
+                        {
+                            case "threesixty":
+                                standardPlayer.Stop();
+                                standardPlayer.gameObject.SetActive(false);
+                                threeSixtyPlayer.gameObject.SetActive(true);
+                                threeSixtyPlayer.Play(CommandInterpreter.Response.answer);
+                                break;
+
+                            case "standard":
+                                threeSixtyPlayer.Stop();
+                                threeSixtyPlayer.gameObject.SetActive(false);
+                                standardPlayer.gameObject.SetActive(true);
+                                standardPlayer.Play(CommandInterpreter.Response.answer);
+                                break;
+
+                            default:
+                                standardPlayer.Stop();
+                                standardPlayer.gameObject.SetActive(false);
+                                threeSixtyPlayer.gameObject.SetActive(true);
+                                threeSixtyPlayer.Play(CommandInterpreter.Response.answer);
+                                break;
+                        }
+                    }
+                    break;
             }
-
-            //switch (CommandInterpreter.text)
-            //{
-            //    case "What are some popular tourist destinations in your country?":
-            //    case "What is your country's most famous bridge?":
-            //        videoPlayer.clip = Resources.Load<VideoClip>("LondonBridge") as VideoClip;
-            //        videoPlayer.Play();
-            //        break;
-            //    default:
-            //        videoPlayer.clip = Resources.Load<VideoClip>("default") as VideoClip;
-            //        videoPlayer.Play();
-            //        break;
-            //}
         }
+        CommandInterpreter.Error = ErrorType.NO_ERROR;
     }
-
-    private void FixedUpdate()
-    {
-        OVRInput.FixedUpdate();
-
-    }
+    
 
     private void ClickHandler()
     {
@@ -161,6 +160,8 @@ public class MicrophoneListenerScript : MonoBehaviour
     private void StartRecording()
     {
         buttonText.text = "Recording";
+        threeSixtyPlayer.Stop();
+        standardPlayer.Stop();
         handler.StartRecording();
     }
 
@@ -180,7 +181,7 @@ public class MicrophoneListenerScript : MonoBehaviour
             //bubbleText.text = text;
             var _thread = new Thread(() => {
                 UnityEngine.Debug.Log($"Time to get text from audio {sw.Elapsed}");
-            var text = CommandInterpreter.GetQuestionFromText(PopulateCulturesDropdown.SelectedCulture);
+            var text = CommandInterpreter.GetQuestionFromText(CultureManager.SelectedCulture);
 
                 UnityEngine.Debug.Log($"Time to get question from text {sw.Elapsed}");
             });

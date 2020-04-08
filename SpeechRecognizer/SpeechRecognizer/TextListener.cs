@@ -200,9 +200,17 @@ namespace SpeechRecognizer
                 recognizer.SetInputToWaveFile(FILE_PATH);
                 recognizer.LoadGrammar(new DictationGrammar());
                 RecognitionResult result = recognizer.Recognize();
+                if (result == null)
+                {
+                    return "NO_WORDS";
+                }
                 Console.WriteLine($"Recognized Question: {result.Text}");
                 recognizedQuestion = PythonHandler.GetQuestionFromText(result.Text);
-                Console.WriteLine($" Interpreted Answer: {result.Text}");
+                if (recognizedQuestion == "NO_MATCH")
+                {
+                    return "NO_QUESTION";
+                }
+                Console.WriteLine($" Interpreted Answer: {recognizedQuestion}");
                 // Echo the data back to the client.  
             }
             return recognizedQuestion;
@@ -236,17 +244,30 @@ namespace SpeechRecognizer
                     Console.WriteLine(alternative.Transcript);
                 }
             Console.WriteLine(text);
+            if (text == null || text == string.Empty)
+            {
+                return "NO_WORDS";
+            }
             Console.WriteLine($"----Time to close {sw.Elapsed}");
-            return PythonHandler.GetQuestionFromText(text);
+            var question = PythonHandler.GetQuestionFromText(text);
+            if (question == "NO_MATCH")
+            {
+                return "NO_QUESTION";
+            }
+            return question;
         }
 
         public static string DotNetTextToSpeech(string text)
         {
             var synth = new SpeechSynthesizer();
 
-            synth.SetOutputToWaveFile("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav");
-            synth.SelectVoice("Microsoft Zira Desktop");
-            synth.Speak(text);
+            using (Stream output = File.Create("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav"))
+            {
+                synth.SetOutputToWaveStream(output);
+                synth.SelectVoice("Microsoft Zira Desktop");
+                synth.Speak(text);
+            }
+
 
             return "C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav";
         }
