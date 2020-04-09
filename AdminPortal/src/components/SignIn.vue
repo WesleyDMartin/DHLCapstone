@@ -1,35 +1,60 @@
 <template>
   <article>
-    <form class="sign-in" action="#">
+    <form @submit="onSubmit"  id="sign-in" class="sign-in">
+      <h1>Sign In</h1>
       <img :src="require('../assets/dhl-people.png')" />
-      <div>Please enter your User ID and Password to sign in</div>
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
-      <a href="#">Forgot your password?</a>
-      <button v-on:click="onSubmit">Sign In</button>
+            <div>
+                Please enter your User Name and Password to sign in
+            </div>
+            <input type="text" v-model="username" placeholder="User Name" />
+            <input type="password" v-model="password" placeholder="Password" />
+            <a href="#">Forgot your password?</a>
+                <v-btn type="submit" form="sign-in" color="red">Sign In</v-btn>
+                <div v-if="loginError">
+                    <v-alert type="error">Invalid username or password.</v-alert>
+                </div>
     </form>
   </article>
 </template>
 
 <script>
+import LoginDb from '../assets/login_db.json'
 export default {
-  methods: {
-    onSubmit() {
-      // this.$router.push("./AdminPage");
-      try {
-        console.log(this.$router);
-        const path = `./AdminPage`;
-        this.$router.push(path);
-      } catch (err) {
-        console.log(err);
-      }
+    methods: {
+        onSubmit() {
+           // https://stackoverflow.com/a/58747480
+            try {
+                const account = LoginDb.filter(account => account.user == this.username);
+                this.isLoggedIn = false;
+                if(account.length ==0){
+                    this.loginError = true;
+                    return;
+                }
+                if(account[0].password != this.password){
+                    this.loginError = true;
+                    return;
+                }
+
+                this.isLoggedIn = true;
+                console.log(this.username);
+                console.log(this.password);
+                console.log(this.$router);
+                const path = `./AdminPage`;
+                this.$router.push(path);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+    data: () => {
+        return {
+            signUp: false,
+            username: "",
+            password: "",
+            isLoggedIn: false,
+            loginError: false
+        };
     }
-  },
-  data: () => {
-    return {
-      signUp: false
-    };
-  }
 };
 </script>
 

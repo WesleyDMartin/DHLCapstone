@@ -207,36 +207,6 @@ title {
   width: 40px;
 }
 
-// form {
-//   position: absolute;
-//   top: 0;
-//   display: flex;
-//   align-items: left;
-//   justify-content: space-around;
-//   flex-direction: column;
-//   padding: 90px 60px;
-//   height: calc(100% - 180px);
-//   text-align: left;
-//   transition: all 0.5s ease-in-out;
-
-//   div {
-//     font-size: 1rem;
-//   }
-
-//   input {
-//     background-color: #fff;
-//     border: none;
-//     padding: 10px 15px;
-//     margin: 6px 0;
-//     width: 100px;
-//     border-radius: 6px;
-//     overflow: hidden;
-
-//     &:focus {
-//       outline: none;
-//     }
-//   }
-// }
 
 button {
   border-radius: 6px;
