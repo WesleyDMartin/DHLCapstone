@@ -67,9 +67,19 @@ public class CultureManager : MonoBehaviour
         _button.transform.localPosition = Vector3.zero;
         _button.onClick.AddListener(delegate { UpdateCulture(cultures[verticalNumber]); });
         var tran = _button.transform.GetComponent<RectTransform>();
-        tran.anchoredPosition = new Vector3(-14.3F, -154.8F - verticalNumber*60, 0);
+        var x = 48F + ((int)(verticalNumber / 4) * 270);
+        var y = 204F - verticalNumber * 60 + ((int)(verticalNumber / 4) * 60 * 4);
+        tran.anchoredPosition = new Vector3(x, y, 0);
         _button.GetComponentInChildren<Text>().text = cultures[verticalNumber];
         buttons.Add(_button);
+    }
+
+    public void IndicateSelectedCulture(int i)
+    {
+        var x = 176.1F + ((int)(i / 4) * 270);
+        var y = 450.9F - i * 60 + ((int)(i / 4) * 60 * 4);
+        var tran = _pointer.transform.GetComponent<RectTransform>();
+        tran.anchoredPosition = new Vector3(x, y, 0);
     }
 
     public void ToggleButtons()
@@ -131,12 +141,6 @@ public class CultureManager : MonoBehaviour
             i++;
         }
         return;
-    }
-
-    public void IndicateSelectedCulture(int i)
-    {
-        var tran = _pointer.transform.GetComponent<RectTransform>();
-        tran.anchoredPosition = new Vector3(117.1F, 92.1F - i * 60, 0);
     }
 
     // Update is called once per frame

@@ -19,6 +19,7 @@ public class MicrophoneListenerScript : MonoBehaviour
     private MicrophoneHandler handler;
     private YoutubePlayer threeSixtyPlayer;
     private YoutubePlayer standardPlayer;
+    private YoutubePlayer backgroundPlayer;
     private VideoClip[] videoClips;
     private NarratorHandler narrator;
     private Vector3 standardScale;
@@ -42,6 +43,7 @@ public class MicrophoneListenerScript : MonoBehaviour
     {
         threeSixtyPlayer = GameObject.Find("Youtube360Player").GetComponent<YoutubePlayer>();
         standardPlayer = GameObject.Find("YoutubeAdvanced").GetComponent<YoutubePlayer>();
+        backgroundPlayer = GameObject.Find("BackgroundPlayer").GetComponent<YoutubePlayer>();
         button = GameObject.Find("RecordButton").GetComponent<Button>();
         
         button.onClick.AddListener(ClickHandler);
@@ -52,15 +54,34 @@ public class MicrophoneListenerScript : MonoBehaviour
         narrator = GameObject.FindObjectOfType<NarratorHandler>();
         standardPlayer.gameObject.SetActive(false);
         threeSixtyPlayer.gameObject.SetActive(false);
-        //threeSixtyPlayer.Play(@"https://www.youtube.com/watch?v=OaH_I-c0UbY");
-        //threeSixtyPlayer.Seek(111);
-        //threeSixtyPlayer.Pause();
+        backgroundPlayer.OnVideoStarted.AddListener(backgroundPlayer.Pause);
+        backgroundPlayer.Play(@"https://youtu.be/OaH_I-c0UbY?t=111");
 
+        standardPlayer.OnVideoFinished.AddListener(delegate { OnFinished(false); });
+        threeSixtyPlayer.OnVideoFinished.AddListener(delegate { OnFinished(true); });
     }
+
+
+    private void OnFinished(bool is360)
+    {
+        if (is360)
+        {
+            backgroundPlayer.gameObject.SetActive(true);
+            threeSixtyPlayer.gameObject.SetActive(false);
+            threeSixtyPlayer.Stop();
+        }
+        else
+        {
+            standardPlayer.Stop();
+            standardPlayer.gameObject.SetActive(false);
+        }
+    }
+
 
     // Update is called once per frame
     private void Update()
     {
+
         if (OVRInput.Get(OVRInput.Button.Two))
         {
             UnityEngine.Debug.Log("Button Pressed");
@@ -120,6 +141,7 @@ public class MicrophoneListenerScript : MonoBehaviour
                                 standardPlayer.Stop();
                                 standardPlayer.gameObject.SetActive(false);
                                 threeSixtyPlayer.gameObject.SetActive(true);
+                                backgroundPlayer.gameObject.SetActive(false);
                                 threeSixtyPlayer.Play(CommandInterpreter.Response.answer);
                                 break;
 
@@ -162,6 +184,8 @@ public class MicrophoneListenerScript : MonoBehaviour
         buttonText.text = "Recording";
         threeSixtyPlayer.Stop();
         standardPlayer.Stop();
+        threeSixtyPlayer.gameObject.SetActive(false);
+        standardPlayer.gameObject.SetActive(false);
         handler.StartRecording();
     }
 

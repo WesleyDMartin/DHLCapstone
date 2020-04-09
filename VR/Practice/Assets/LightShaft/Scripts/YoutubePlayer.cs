@@ -1230,8 +1230,6 @@ public class YoutubePlayer : MonoBehaviour
 
         videoEnded = false;
 
-        OnVideoStarted.Invoke();
-
         if (videoQuality != YoutubeVideoQuality.STANDARD)
         {
             //if (!noAudioAtacched)
@@ -1281,6 +1279,8 @@ public class YoutubePlayer : MonoBehaviour
             }
         }
 
+
+        OnVideoStarted.Invoke();
 
     }
 
