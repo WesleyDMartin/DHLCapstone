@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -24,6 +25,7 @@ public class CultureManager : MonoBehaviour
     bool submitProcessing = false;
     private NarratorHandler narrator;
     private bool buttonsHidden = false;
+    private ServiceHandler serviceHandler;
 
     public Button prefab;
 
@@ -33,7 +35,8 @@ public class CultureManager : MonoBehaviour
     void Awake()
     {
         buttons = new List<Button>();
-
+        serviceHandler = GameObject.FindObjectOfType<ServiceHandler>();
+        serviceHandler.ServicesReady += InitialCulture;
         prefab = Resources.Load<Button>("CultureButton");
         _toggleCultures = GameObject.Find("ToggleCultures").GetComponent<Button>();
         source = transform.GetComponent<AudioSource>();
@@ -50,9 +53,14 @@ public class CultureManager : MonoBehaviour
         {
             MakeButton(i++);
         });
-        
-        CommandInterpreter.SetCulture(cultures[0]);
+
         SelectedCulture = cultures[0];
+    }
+
+
+    private void InitialCulture(object sender, EventArgs args)
+    {
+        CommandInterpreter.SetCulture(cultures[0]);
     }
 
     public void MakeButton(int verticalNumber)
@@ -203,10 +211,8 @@ public class CultureManager : MonoBehaviour
             audioLoader = new WWW("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav");
             while (!audioLoader.isDone)
             {
-                Debug.Log("uploading");
             }
-
-            Debug.Log("1");
+            
 
             source.clip = audioLoader.GetAudioClip(false, false, AudioType.WAV);
         }

@@ -215,6 +215,7 @@ public class YoutubePlayer : MonoBehaviour
     #region SERVER VARIABLES
 
     private YoutubeResultIds newRequestResults;
+    private static string jsUrl;
 
     /*PRIVATE INFO DO NOT CHANGE THESE URLS OR VALUES, ONLY IF YOU WANT HOST YOUR OWN SERVER| TURORIALS IN THE PROJECT FILES*/
     private const string serverURI = "https://unity-dev-youtube.herokuapp.com/api/info?url=";
@@ -1230,6 +1231,7 @@ public class YoutubePlayer : MonoBehaviour
 
         videoEnded = false;
 
+
         if (videoQuality != YoutubeVideoQuality.STANDARD)
         {
             //if (!noAudioAtacched)
@@ -1278,7 +1280,6 @@ public class YoutubePlayer : MonoBehaviour
                 audioPlayer.time = startFromSecondTime;
             }
         }
-
 
         OnVideoStarted.Invoke();
 
@@ -1928,15 +1929,16 @@ public class YoutubePlayer : MonoBehaviour
 
     private string lsigForVideo;
     private string lsigForAudio;
+    
 
     #region Decryption System
+
     public void DecryptDownloadUrl(string encryptedUrlVideo, string encrytedUrlAudio, string html, bool videoOnly)
     {
         EncryptUrlForAudio = encrytedUrlAudio;
         EncryptUrlForVideo = encryptedUrlVideo;
-
-        string jsUrl = string.Format("http://s.ytimg.com/yts/jsbin/player_ias-{0}.js", htmlVersion);
-
+        //string t = "https://www.youtube.com/s/player/5168268b/player_ias.vflset/en_US/base.js"
+        //string jsUrl = string.Format("http://s.ytimg.com/yts/jsbin/player_ias-{0}.js", htmlVersion);
 
         if (videoOnly)
         {
@@ -2012,6 +2014,8 @@ public class YoutubePlayer : MonoBehaviour
     private Thread thread1;
     public void ReadyForExtract(string r, bool audioExtract)
     {
+
+
         if (audioExtract)
         {
            
@@ -2058,7 +2062,7 @@ public class YoutubePlayer : MonoBehaviour
         UnityWebRequest request = UnityWebRequest.Get(uri);
         //request.SetRequestHeader("User-Agent", USER_AGENT);
         yield return request.Send();
-        WriteLog("js", request.downloadHandler.text);
+        //WriteLog("js", request.downloadHandler.text);
         ReadyForExtract(request.downloadHandler.text, audio);
     }
     #endregion
@@ -2568,9 +2572,9 @@ public class YoutubePlayer : MonoBehaviour
                 IEnumerable<ExtractionInfo> downloadUrls = ExtractDownloadUrls(json);
                
                 List<VideoInfo> infos = GetVideoInfos(downloadUrls, videoTitle).ToList();
-              
                 string htmlPlayerVersion = GetHtml5PlayerVersion(json);
                 htmlVersion = GetHtml5PlayerVersion(json);
+                
                 if (string.IsNullOrEmpty(htmlVersion))
                 {
                     RetryPlayYoutubeVideo();
@@ -2589,6 +2593,7 @@ public class YoutubePlayer : MonoBehaviour
                 if (!loadYoutubeUrlsOnly)
                 {
                     Debug.Log("Resolver Exception!: " + e.Message);
+                    Debug.Log(Application.persistentDataPath);
                     //string filePath = Application.persistentDataPath + "/log_download_exception_" + DateTime.Now.ToString("ddMMyyyyhhmmssffff") + ".txt";
                     //Debug.Log("DownloadUrl content saved to " + filePath);
                     WriteLog("log_download_exception","jsonForHtml: " + jsonForHtmlVersion);
@@ -2735,24 +2740,24 @@ public class YoutubePlayer : MonoBehaviour
 
     private static string GetAdaptiveStreamMap(JObject json)
     {
-        Debug.Log("Ok");
+        //Debug.Log("Ok");
         JToken streamMap = json["args"]["adaptive_fmts"];
-        Debug.Log("fine");
+        //Debug.Log("fine");
         // bugfix: adaptive_fmts is missing in some videos, use url_encoded_fmt_stream_map instead
         if (streamMap == null)
         {
-            Debug.Log("32");
+            //Debug.Log("32");
             streamMap = json["args"]["url_encoded_fmt_stream_map"];
-            Debug.Log("33");
+            //Debug.Log("33");
             if (streamMap == null)
             {
-                Debug.Log("45");
+                //Debug.Log("45");
                 string unescaped = Regex.Unescape(json["args"]["player_response"].ToString());
                 JObject newJson = JObject.Parse(json["args"]["player_response"].ToString());
                 streamMap = newJson["streamingData"]["adaptiveFormats"];
-                WriteLog("NewJson", newJson.ToString());
-                Debug.Log("53");
-                Debug.Log(streamMap);
+                //WriteLog("NewJson", newJson.ToString());
+                //Debug.Log("53");
+                //Debug.Log(streamMap);
             }
         }
 
@@ -2773,11 +2778,17 @@ public class YoutubePlayer : MonoBehaviour
     }
     private static string GetHtml5PlayerVersion(JObject json)
     {
+
         var regex = new Regex(@"player_ias-(.+?).js");
 
         string js = json["assets"]["js"].ToString();
-    
+        jsUrl = "https://www.youtube.com"+js;
+
         Match match = regex.Match(js);
+        if (match.Success) return match.Result("$1");
+
+        regex = new Regex(@"player_ias(.+?).js");
+        match = regex.Match(js);
         if (match.Success) return match.Result("$1");
 
         regex = new Regex(@"player-(.+?).js");

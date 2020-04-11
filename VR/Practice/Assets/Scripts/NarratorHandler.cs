@@ -100,10 +100,8 @@ public class NarratorHandler : MonoBehaviour
             audioLoader = new WWW("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav");
             while (!audioLoader.isDone)
             {
-                Debug.Log("uploading");
             }
-
-            Debug.Log("1");
+            
 
             source.clip = audioLoader.GetAudioClip(false, false, AudioType.WAV);
             audioLength = (int)source.clip.length;

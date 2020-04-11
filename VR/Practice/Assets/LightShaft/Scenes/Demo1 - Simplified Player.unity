@@ -222,6 +222,16 @@ Prefab:
       propertyPath: videoPlayer
       value: 
       objectReference: {fileID: 839630919}
+    - target: {fileID: 114654752377565014, guid: f49b1865d907dca4a807588585397534,
+        type: 2}
+      propertyPath: autoPlay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114654752377565014, guid: f49b1865d907dca4a807588585397534,
+        type: 2}
+      propertyPath: fullscreen
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f49b1865d907dca4a807588585397534, type: 2}
   m_IsPrefabParent: 0

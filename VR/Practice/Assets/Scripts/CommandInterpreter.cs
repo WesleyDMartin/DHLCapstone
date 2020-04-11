@@ -10,6 +10,7 @@ using System.Threading;
 using System.Text;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -32,6 +33,7 @@ namespace Assets.Scripts
         public static bool ReadyToRead = false;
         public static bool ReadyToSpeak = false;
         public static ErrorType Error = ErrorType.NO_ERROR;
+
         public static string GetQuestionFromText(string culture)
         {
             ReadyToRead = false;

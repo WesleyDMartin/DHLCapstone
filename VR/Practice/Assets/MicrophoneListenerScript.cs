@@ -55,7 +55,7 @@ public class MicrophoneListenerScript : MonoBehaviour
         standardPlayer.gameObject.SetActive(false);
         threeSixtyPlayer.gameObject.SetActive(false);
         backgroundPlayer.OnVideoStarted.AddListener(backgroundPlayer.Pause);
-        backgroundPlayer.Play(@"https://youtu.be/OaH_I-c0UbY?t=111");
+        backgroundPlayer.Play(@"https://youtu.be/OaH_I-c0UbY?t=112");
 
         standardPlayer.OnVideoFinished.AddListener(delegate { OnFinished(false); });
         threeSixtyPlayer.OnVideoFinished.AddListener(delegate { OnFinished(true); });
@@ -84,7 +84,6 @@ public class MicrophoneListenerScript : MonoBehaviour
 
         if (OVRInput.Get(OVRInput.Button.Two))
         {
-            UnityEngine.Debug.Log("Button Pressed");
             if (!handler.IsRecording)
             {
                 StartRecording();

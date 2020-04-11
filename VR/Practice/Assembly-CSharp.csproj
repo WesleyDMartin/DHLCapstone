@@ -432,8 +432,10 @@
     <Compile Include="Assets\Scripts\ResizePanel.cs" />
     <Compile Include="Assets\Scripts\ScrollDetailTexture.cs" />
     <Compile Include="Assets\Scripts\ShowSliderValue.cs" />
+    <Compile Include="Assets\Scripts\SupportingPrograms.cs" />
     <Compile Include="Assets\Scripts\TiltWindow.cs" />
     <Compile Include="Assets\Scripts\VoiceApiHandler.cs" />
+    <Compile Include="Assets\ServiceHandler.cs" />
     <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\CameraLogic.cs" />
     <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\Demo.cs" />
     <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\SimpleCharacterControl.cs" />

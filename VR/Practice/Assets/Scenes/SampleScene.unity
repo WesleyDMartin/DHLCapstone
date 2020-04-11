@@ -337,13 +337,13 @@ PrefabInstance:
     - target: {fileID: 114179375918869224, guid: 5d410f561f4a06c4f93067d94dc545ce,
         type: 3}
       propertyPath: videoQuality
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114179375918869224, guid: 5d410f561f4a06c4f93067d94dc545ce,
         type: 3}
       propertyPath: audioPlayer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2117645233}
     - target: {fileID: 1348297416665978, guid: 5d410f561f4a06c4f93067d94dc545ce, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1114,6 +1114,16 @@ PrefabInstance:
       propertyPath: audioPlayer
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114924026913519534, guid: afcb2c04ccaaed1478594f9f88e45133,
+        type: 3}
+      propertyPath: startFromSecond
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114924026913519534, guid: afcb2c04ccaaed1478594f9f88e45133,
+        type: 3}
+      propertyPath: youtubeUrl
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afcb2c04ccaaed1478594f9f88e45133, type: 3}
 --- !u!328 &922295339 stripped
@@ -1252,6 +1262,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &974364650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974364641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7936b28a46364a95440e02dd23467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &986075460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1320,13 +1342,13 @@ PrefabInstance:
     - target: {fileID: 114924026913519534, guid: afcb2c04ccaaed1478594f9f88e45133,
         type: 3}
       propertyPath: videoQuality
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114924026913519534, guid: afcb2c04ccaaed1478594f9f88e45133,
         type: 3}
       propertyPath: audioPlayer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1149895333}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afcb2c04ccaaed1478594f9f88e45133, type: 3}
 --- !u!1 &1139185189
