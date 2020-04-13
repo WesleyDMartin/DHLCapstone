@@ -1,7 +1,6 @@
 <template>
   <article>
     <form @submit="onSubmit"  id="sign-in" class="sign-in">
-      <h1>Sign In</h1>
       <img :src="require('../assets/dhl-people.png')" />
             <div>
                 Please enter your User Name and Password to sign in
@@ -9,7 +8,7 @@
             <input type="text" v-model="username" placeholder="User Name" />
             <input type="password" v-model="password" placeholder="Password" />
             <a href="#">Forgot your password?</a>
-                <v-btn type="submit" form="sign-in" color="red">Sign In</v-btn>
+                <button type="submit" form="sign-in">Sign In</button>
                 <div v-if="loginError">
                     <v-alert type="error">Invalid username or password.</v-alert>
                 </div>
@@ -101,7 +100,6 @@ a {
 button {
   border-radius: 6px;
   background-color: rgb(241, 143, 51);
-  color: #fff;
   padding: 10px 40px;
   cursor: pointer;
   transition: transform 0.1s ease-in;
@@ -147,7 +145,7 @@ form {
   }
 
   input {
-    background-color: #eee;
+    background-color: #FFF;
     border: none;
     padding: 10px 15px;
     margin: 6px 0;
