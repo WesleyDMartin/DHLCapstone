@@ -15,23 +15,23 @@
         <v-col>
           <v-card color="#ededed">
             <v-card-title v-text="cultures.title"></v-card-title>
-            <div class="question" v-for="(item, index) in cultures.data" :key="item.id">
-              <div v-on:click="updateQuestions(item.name)">{{index + 1}}. {{item.name}}</div>
-
-              <img
-                class="delete"
-                v-on:click="deleteCulture(item.id)"
-                :src="require('../assets/delete.png')"
-              />
+            <div class="question" v-for="(item, index) in paginatedDataCulture" :key="item.id">
+                      <div v-on:click="updateQuestions(item.name)">{{index+1}}. {{item.name}}</div>
+                      <img class="delete" v-on:click="deleteCulture(item.id)" :src="require('../assets/delete.png')" />
             </div>
+            <button v-on:click="prevPageCulture" :disabled="pageNumberCulture==0">Previous</button>
+              &nbsp;&nbsp;
+            <button v-on:click="nextPageCulture" :disabled="pageNumberCulture >= pageCountCulture - 1">Next</button>
+              
             <form v-on:submit.prevent="onSubmitCulture">
-              <v-text-field ref="culturename" width="25%"></v-text-field>
-              <button>Submit!</button>
+              <v-text-field ref="culturename" width="25%" placeholder="Add New Culture"></v-text-field>
+              <button>Add Culture</button>
             </form>
           </v-card>
           <v-card color="#ededed">
             <v-card-title v-text="questions.title"></v-card-title>
-            <div class="question" v-for="(item, index) in questions.data" :key="item.id">
+            
+            <!-- <div class="question" v-for="(item, index) in questions.data" :key="item.id">
               <div v-on:click="updateResponse(item)">
                 {{index + 1}}.
                 {{item.value}}
@@ -41,7 +41,15 @@
                 v-on:click="deleteQuestion(item.id)"
                 :src="require('../assets/delete.png')"
               />
+            </div> -->
+            <div class="question" v-for="(item, index) in paginatedDataQuestion" :key="item.id">
+                      <div v-on:click="updateResponse(item)">{{index+1}}. {{item.value}}</div>
+                      <img class="delete" v-on:click="deleteQuestion(item.id)" :src="require('../assets/delete.png')" />
             </div>
+            <button v-on:click="prevPageQuestion" :disabled="pageNumberQuestion==0">Previous</button>
+              &nbsp;&nbsp;
+            <button v-on:click="nextPageQuestion" :disabled="pageNumberQuestion >= pageCountQuestion - 1">Next</button>
+
             <form v-on:submit.prevent="onSubmitQuestion">
               <v-text-field ref="question" width="25%" placeholder="Question"></v-text-field>
               <v-text-field ref="text_answer" width="25%" placeholder="Text Answer"></v-text-field>
@@ -56,7 +64,7 @@
                   <br />
                 </v-radio-group>
               </v-card-text>
-              <button>Submit!</button>
+              <button>Add Question</button>
             </form>
           </v-card>
           <v-card color="#ededed">
@@ -79,6 +87,13 @@
 <script>
 import axios from "axios";
 export default {
+  props: {
+    size:{
+      type: Number,
+      required:false,
+      default: 5
+    }
+  },
   data: () => ({
     cultures: {
       title: "Supported Culture",
@@ -86,6 +101,8 @@ export default {
       flex: 4,
       data: []
     },
+    pageNumberCulture: 0,
+    pageNumberQuestion: 0,
     questions: {
       title: "List of Questions",
       src: "https://cdn.vuetifyjs.com/",
@@ -175,7 +192,53 @@ export default {
       this.$refs.question.internalValue="";
       this.$refs.text_answer.internalValue="";
       this.$refs.answerurl.internalValue="";
-    }
+    },
+    nextPageCulture(){
+    this.pageNumberCulture++;
+    },
+    prevPageCulture(){
+      this.pageNumberCulture--;
+    },
+    nextPageQuestion(){
+    this.pageNumberQuestion++;
+    },
+    prevPageQuestion(){
+      this.pageNumberQuestion--;
+    },
+  },
+  computed: {
+    pageCountCulture(){
+      let l = this.cultures.data.length,
+      s= this.size;
+      return Math.ceil(l/s);
+    },
+    paginatedDataCulture(){
+      const start = this.pageNumberCulture * this.size,
+      end = start + this.size;
+
+      return this.cultures.data.slice(start, end);
+    },
+    pageCountQuestion(){
+      let l = 0;
+      if (this.questions.data != undefined)
+      {
+        l = this.questions.data.length;
+      }
+      let s = this.size;
+      return Math.ceil(l/s);
+    },
+    paginatedDataQuestion(){
+      const start = this.pageNumberQuestion * this.size,
+      end = start + this.size;
+
+      // I don't know how this gets set to undefined sometimes.
+      if (this.questions.data == undefined)
+      {
+        return [];
+      }
+
+      return this.questions.data.slice(start, end);
+    },
   },
   beforeMount() {
     axios.get(this.host + "cultures").then(response => {
