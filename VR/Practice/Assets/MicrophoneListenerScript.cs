@@ -83,6 +83,15 @@ public class MicrophoneListenerScript : MonoBehaviour
     private void Update()
     {
 
+        if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        {
+            backgroundPlayer.gameObject.SetActive(true);
+            standardPlayer.Stop();
+            threeSixtyPlayer.Stop();
+            standardPlayer.gameObject.SetActive(false);
+            threeSixtyPlayer.gameObject.SetActive(false);
+        }
+
         if (OVRInput.Get(OVRInput.Button.One))
         {
             if (!handler.IsRecording)
