@@ -47,7 +47,7 @@ public class NarratorHandler : MonoBehaviour
 
 
     //Ouput the new value of the Dropdown into Text
-    public IEnumerator Speak(string text, int speakDelay = 0, int bubbleDelay = 0)
+    public IEnumerator Speak(string text, int speakDelay = 0, int bubbleDelay = 5)
     {
         yield return new WaitForSeconds(speakDelay);
 
@@ -79,33 +79,41 @@ public class NarratorHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (source.clip != null && source.clip.isReadyToPlay && CommandInterpreter.ReadyToSpeak)
+        try
         {
-            StartCoroutine(DonePlaying(source.clip.length));
-            Debug.Log(source.clip.length);
-            Debug.Log("playing");
-            source.Play();
-            playing = true;
-        }
-
-        if (playing && !source.isPlaying)
-        {
-            source.clip = null;
-            playing = false;
-            CommandInterpreter.ReadyToSpeak = false;
-        }
-
-        if (CommandInterpreter.ReadyToSpeak)
-        {
-            audioLoader = new WWW("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav");
-            while (!audioLoader.isDone)
+            if (source.clip != null && source.clip.isReadyToPlay && CommandInterpreter.ReadyToSpeak)
             {
+                StartCoroutine(DonePlaying(source.clip.length));
+                Debug.Log(source.clip.length);
+                Debug.Log("playing");
+                source.Play();
+                playing = true;
             }
-            
 
-            source.clip = audioLoader.GetAudioClip(false, false, AudioType.WAV);
-            audioLength = (int)source.clip.length;
+            if (playing && !source.isPlaying)
+            {
+                source.clip = null;
+                playing = false;
+                CommandInterpreter.ReadyToSpeak = false;
+            }
+
+            if (CommandInterpreter.ReadyToSpeak)
+            {
+                audioLoader = new WWW("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav");
+                while (!audioLoader.isDone)
+                {
+                }
+
+
+                source.clip = audioLoader.GetAudioClip(false, false, AudioType.WAV);
+                audioLength = (int)source.clip.length;
+            }
         }
+        catch(Exception e)
+        {
+            UnityEngine.Debug.Log(e.Message);
+        }
+
     }
 
 

@@ -36,7 +36,7 @@ public class CultureManager : MonoBehaviour
     {
         buttons = new List<Button>();
         serviceHandler = GameObject.FindObjectOfType<ServiceHandler>();
-        serviceHandler.ServicesReady += InitialCulture;
+        ServiceHandler.ServicesReady += InitialCulture;
         prefab = Resources.Load<Button>("CultureButton");
         _toggleCultures = GameObject.Find("ToggleCultures").GetComponent<Button>();
         source = transform.GetComponent<AudioSource>();

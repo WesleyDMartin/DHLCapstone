@@ -52,6 +52,7 @@ public class MicrophoneListenerScript : MonoBehaviour
         goAudioSource = transform.GetComponent<AudioSource>();
         handler = transform.GetComponent<MicrophoneHandler>();
         narrator = GameObject.FindObjectOfType<NarratorHandler>();
+        narrator.DonePlayingEvent += new NarratorHandler.DonePlayingEventHandler(raiseVolume);
         standardPlayer.gameObject.SetActive(false);
         threeSixtyPlayer.gameObject.SetActive(false);
         backgroundPlayer.OnVideoStarted.AddListener(backgroundPlayer.Pause);
@@ -82,7 +83,7 @@ public class MicrophoneListenerScript : MonoBehaviour
     private void Update()
     {
 
-        if (OVRInput.Get(OVRInput.Button.Two))
+        if (OVRInput.Get(OVRInput.Button.One))
         {
             if (!handler.IsRecording)
             {
@@ -123,7 +124,6 @@ public class MicrophoneListenerScript : MonoBehaviour
                     {
                         if (CommandInterpreter.Response.text_answer != null && CommandInterpreter.Response.text_answer != string.Empty)
                         {
-                            narrator.DonePlayingEvent += new NarratorHandler.DonePlayingEventHandler(raiseVolume);
                             StartCoroutine(narrator.Speak(CommandInterpreter.Response.text_answer, 3, 8));
                             threeSixtyPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)0.1;
                             standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)0.1;
@@ -146,6 +146,7 @@ public class MicrophoneListenerScript : MonoBehaviour
 
                             case "standard":
                                 threeSixtyPlayer.Stop();
+                                backgroundPlayer.gameObject.SetActive(true);
                                 threeSixtyPlayer.gameObject.SetActive(false);
                                 standardPlayer.gameObject.SetActive(true);
                                 standardPlayer.Play(CommandInterpreter.Response.answer);
@@ -230,6 +231,5 @@ public class MicrophoneListenerScript : MonoBehaviour
         UnityEngine.Debug.Log("Called");
         threeSixtyPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
         standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
-        narrator.DonePlayingEvent -= new NarratorHandler.DonePlayingEventHandler(raiseVolume);
     }
 }

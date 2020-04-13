@@ -11,7 +11,7 @@ public class ServiceHandler : MonoBehaviour
     private CancellationTokenSource tokenSource;
     private CancellationToken token;
 
-    public event EventHandler ServicesReady;
+    public static event EventHandler ServicesReady;
 
     // Store references to the tasks so that we can wait on them and
     // observe their status after cancellation.
@@ -37,12 +37,11 @@ public class ServiceHandler : MonoBehaviour
         tasks.Add(SpeechRecognizer);
 
         StartCoroutine(Delay());
-        ServicesReady.Invoke(this, EventArgs.Empty);
     }
 
     private IEnumerator Delay()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
 
         ServicesReady.Invoke(this, EventArgs.Empty);
     }
@@ -72,7 +71,7 @@ public class ServiceHandler : MonoBehaviour
 
     public static async Task<int> RunProcessAsync(string command, string args, CancellationToken token)
     {
-        UnityEngine.Debug.Log(command);
+        UnityEngine.Debug.Log("PATH TO " + args + ": " +command);
         UnityEngine.Debug.Log(args);
         using (var process = new Process
         {
@@ -96,7 +95,7 @@ public class ServiceHandler : MonoBehaviour
     public static async Task<int> RunProcessAsync(string path, string command, string args, CancellationToken token)
     {
         UnityEngine.Debug.Log(path);
-        UnityEngine.Debug.Log(command);
+        UnityEngine.Debug.Log("PATH TO " + args + ": " + command);
         UnityEngine.Debug.Log(args);
         using (var process = new Process
         {
