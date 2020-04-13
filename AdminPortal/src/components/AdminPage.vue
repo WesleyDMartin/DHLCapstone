@@ -97,7 +97,7 @@
         </v-col>
         <v-col>
           <v-card :color="color">
-            <v-card-title v-text="responses.title"></v-card-title>
+            <v-card-title v-text="responses.title + responses.data.question"></v-card-title>
               <v-card-text>Response: {{responses.data.text}}</v-card-text>
               <v-card-text>Type: {{responses.data.videotype}}</v-card-text>
               <v-card-text align="center">
@@ -142,7 +142,7 @@ export default {
       data: []
     },
     responses: {
-      title: "Answer",
+      title: "Answer For: ",
       src: "https://cdn.vuetifyjs.com/",
       flex: 12,
       data: {}
@@ -222,6 +222,7 @@ export default {
     },
     updateResponse(answer) {
       this.responses.data = {
+        question: answer.value,
         url: answer.answer.replace("watch?v=", "embed/"),
         text: answer.text_answer,
         videotype: answer.videotype == "standard" ? "2-D Movie" : "360 Movie"
