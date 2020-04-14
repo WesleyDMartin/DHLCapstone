@@ -1955,9 +1955,13 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: xcvcxvxcvxcvxc
+  m_Text: People who lives abroad usually still have distant relatives if not some
+    immediate family members. I also have lots of family and friends still residing
+    in Bangladesh. It is very important for me and any other Bangladeshi to stay in
+    touch with the culture as it defines us. Also, it is a set of values and way of
+    life that I still find interesting.
 --- !u!222 &1664481983
 CanvasRenderer:
   m_ObjectHideFlags: 0

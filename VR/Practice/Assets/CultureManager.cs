@@ -26,6 +26,8 @@ public class CultureManager : MonoBehaviour
     private NarratorHandler narrator;
     private bool buttonsHidden = false;
     private ServiceHandler serviceHandler;
+    public delegate void NewCultureEvent();
+    public static event NewCultureEvent NewCultureEventHandler;
 
     public Button prefab;
 
@@ -121,10 +123,12 @@ public class CultureManager : MonoBehaviour
 
     void UpdateCulture(string culture)
     {
+        NewCultureEventHandler?.Invoke();
         IndicateSelectedCulture(culture);
         CommandInterpreter.ReadyToSpeak = false;
         buttonText.text = culture;
         SelectedCulture = culture;
+        narrator.StopSpeaking();
         StartCoroutine(narrator.Speak("Great! Lets start learning about the " +
             culture + " culture. Go ahead and ask a question," +
             "and we will see if we can answer it for you!", 2, 7));
@@ -191,30 +195,30 @@ public class CultureManager : MonoBehaviour
 
 
 
-        if (source.clip != null && source.clip.isReadyToPlay && CommandInterpreter.ReadyToSpeak)
-        {
-            Debug.Log("playing");
-            source.Play();
-            CommandInterpreter.ReadyToSpeak = false;
-            playing = true;
-        }
+        //if (source.clip != null && source.clip.isReadyToPlay && CommandInterpreter.ReadyToSpeak)
+        //{
+        //    Debug.Log("playing");
+        //    source.Play();
+        //    CommandInterpreter.ReadyToSpeak = false;
+        //    playing = true;
+        //}
 
-        if (playing && !source.isPlaying)
-        {
-            source.clip = null;
-            playing = false;
-            submitProcessing = false;
-        }
+        //if (playing && !source.isPlaying)
+        //{
+        //    source.clip = null;
+        //    playing = false;
+        //    submitProcessing = false;
+        //}
 
-        if (CommandInterpreter.ReadyToSpeak)
-        {
-            audioLoader = new WWW("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav");
-            while (!audioLoader.isDone)
-            {
-            }
+        //if (CommandInterpreter.ReadyToSpeak)
+        //{
+        //    audioLoader = new WWW("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav");
+        //    while (!audioLoader.isDone)
+        //    {
+        //    }
             
 
-            source.clip = audioLoader.GetAudioClip(false, false, AudioType.WAV);
-        }
+        //    source.clip = audioLoader.GetAudioClip(false, false, AudioType.WAV);
+        //}
     }
 }

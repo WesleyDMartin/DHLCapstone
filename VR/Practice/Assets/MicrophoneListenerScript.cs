@@ -53,6 +53,7 @@ public class MicrophoneListenerScript : MonoBehaviour
         handler = transform.GetComponent<MicrophoneHandler>();
         narrator = GameObject.FindObjectOfType<NarratorHandler>();
         narrator.DonePlayingEvent += new NarratorHandler.DonePlayingEventHandler(raiseVolume);
+        CultureManager.NewCultureEventHandler += StopVideos;
         standardPlayer.gameObject.SetActive(false);
         threeSixtyPlayer.gameObject.SetActive(false);
         backgroundPlayer.OnVideoStarted.AddListener(backgroundPlayer.Pause);
@@ -67,7 +68,6 @@ public class MicrophoneListenerScript : MonoBehaviour
     {
         if (is360)
         {
-            backgroundPlayer.gameObject.SetActive(true);
             threeSixtyPlayer.gameObject.SetActive(false);
             threeSixtyPlayer.Stop();
         }
@@ -78,6 +78,15 @@ public class MicrophoneListenerScript : MonoBehaviour
         }
     }
 
+    private void StopVideos()
+    {
+        narrator.StopSpeaking();
+        standardPlayer.Stop();
+        threeSixtyPlayer.Stop();
+        standardPlayer.gameObject.SetActive(false);
+        threeSixtyPlayer.gameObject.SetActive(false);
+    }
+
 
     // Update is called once per frame
     private void Update()
@@ -85,11 +94,7 @@ public class MicrophoneListenerScript : MonoBehaviour
 
         if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
         {
-            backgroundPlayer.gameObject.SetActive(true);
-            standardPlayer.Stop();
-            threeSixtyPlayer.Stop();
-            standardPlayer.gameObject.SetActive(false);
-            threeSixtyPlayer.gameObject.SetActive(false);
+            StopVideos();
         }
 
         if (OVRInput.Get(OVRInput.Button.One))
@@ -112,10 +117,14 @@ public class MicrophoneListenerScript : MonoBehaviour
             {
                 
                 case ErrorType.NO_WORDS:
+                    CommandInterpreter.Response = null;
+                    narrator.StopSpeaking();
                     StartCoroutine(narrator.Speak("Sorry, I didn't quite catch that, " +
                         "please try asking your question again"));
                     break;
                 case ErrorType.NO_QUESTION:
+                    CommandInterpreter.Response = null;
+                    narrator.StopSpeaking();
                     StartCoroutine(narrator.Speak("Sorry, I don't know how to answer that!"));
                     break;
                 case ErrorType.NO_ERROR:
@@ -124,7 +133,7 @@ public class MicrophoneListenerScript : MonoBehaviour
                     CommandInterpreter.ReadyToRead = false;
 
 
-                    if (CommandInterpreter.Response == null || CommandInterpreter.Response.answer == string.Empty)
+                    if (CommandInterpreter.Response == null)
                     {
                         threeSixtyPlayer.Stop();
                         standardPlayer.Stop();
@@ -133,6 +142,7 @@ public class MicrophoneListenerScript : MonoBehaviour
                     {
                         if (CommandInterpreter.Response.text_answer != null && CommandInterpreter.Response.text_answer != string.Empty)
                         {
+                            narrator.StopSpeaking();
                             StartCoroutine(narrator.Speak(CommandInterpreter.Response.text_answer, 3, 8));
                             threeSixtyPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)0.1;
                             standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)0.1;
@@ -143,30 +153,31 @@ public class MicrophoneListenerScript : MonoBehaviour
                             standardPlayer.videoPlayer.GetTargetAudioSource(0).volume = (float)1;
                         }
 
-                        switch (CommandInterpreter.Response.videotype)
+                        if (CommandInterpreter.Response.answer != null && CommandInterpreter.Response.answer != string.Empty)
                         {
-                            case "threesixty":
-                                standardPlayer.Stop();
-                                standardPlayer.gameObject.SetActive(false);
-                                threeSixtyPlayer.gameObject.SetActive(true);
-                                backgroundPlayer.gameObject.SetActive(false);
-                                threeSixtyPlayer.Play(CommandInterpreter.Response.answer);
-                                break;
+                            switch (CommandInterpreter.Response.videotype)
+                            {
+                                case "threesixty":
+                                    standardPlayer.Stop();
+                                    standardPlayer.gameObject.SetActive(false);
+                                    threeSixtyPlayer.gameObject.SetActive(true);
+                                    threeSixtyPlayer.Play(CommandInterpreter.Response.answer);
+                                    break;
 
-                            case "standard":
-                                threeSixtyPlayer.Stop();
-                                backgroundPlayer.gameObject.SetActive(true);
-                                threeSixtyPlayer.gameObject.SetActive(false);
-                                standardPlayer.gameObject.SetActive(true);
-                                standardPlayer.Play(CommandInterpreter.Response.answer);
-                                break;
+                                case "standard":
+                                    threeSixtyPlayer.Stop();
+                                    threeSixtyPlayer.gameObject.SetActive(false);
+                                    standardPlayer.gameObject.SetActive(true);
+                                    standardPlayer.Play(CommandInterpreter.Response.answer);
+                                    break;
 
-                            default:
-                                standardPlayer.Stop();
-                                standardPlayer.gameObject.SetActive(false);
-                                threeSixtyPlayer.gameObject.SetActive(true);
-                                threeSixtyPlayer.Play(CommandInterpreter.Response.answer);
-                                break;
+                                default:
+                                    standardPlayer.Stop();
+                                    standardPlayer.gameObject.SetActive(false);
+                                    threeSixtyPlayer.gameObject.SetActive(true);
+                                    threeSixtyPlayer.Play(CommandInterpreter.Response.answer);
+                                    break;
+                            }
                         }
                     }
                     break;
@@ -191,6 +202,7 @@ public class MicrophoneListenerScript : MonoBehaviour
     private void StartRecording()
     {
         buttonText.text = "Recording";
+        narrator.StopSpeaking();
         threeSixtyPlayer.Stop();
         standardPlayer.Stop();
         threeSixtyPlayer.gameObject.SetActive(false);
