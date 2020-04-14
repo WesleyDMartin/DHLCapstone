@@ -24,7 +24,7 @@ public class CultureManager : MonoBehaviour
     bool upProcessing = false;
     bool submitProcessing = false;
     private NarratorHandler narrator;
-    private bool buttonsHidden = false;
+    public bool buttonsHidden = false;
     private ServiceHandler serviceHandler;
     public delegate void NewCultureEvent();
     public static event NewCultureEvent NewCultureEventHandler;
