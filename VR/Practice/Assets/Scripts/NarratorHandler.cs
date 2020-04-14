@@ -19,6 +19,7 @@ public class NarratorHandler : MonoBehaviour
     private bool playing = false;
     public delegate void DonePlayingEventHandler();
     public event DonePlayingEventHandler DonePlayingEvent;
+    private RawImage guide;
 
 
     private int audioLength = 0;
@@ -26,11 +27,13 @@ public class NarratorHandler : MonoBehaviour
     void Start()
     {
         source = GameObject.Find("Narrator").GetComponent<AudioSource>();
+        guide = GameObject.Find("Guide").GetComponent<RawImage>();
         api = new CulturesAndQuestionsApi();
         bubble = GameObject.Find("ShowText").GetComponent<RawImage>();
         bubbleText = GameObject.Find("TextBubble").GetComponent<Text>();
         bubbleText.transform.localScale = new Vector3(0, 0, 0);
         bubble.transform.localScale = new Vector3(0, 0, 0);
+        guide.transform.localScale = new Vector3(0, 0, 0);
 
         if (CultureManager.cultures.Count == 1)
         {
@@ -56,6 +59,7 @@ public class NarratorHandler : MonoBehaviour
         File.Delete("C:\\Users\\User\\AppData\\LocalLow\\DefaultCompany\\Practice\\out.wav");
         bubbleText.transform.localScale = new Vector3(0, 0, 0);
         bubble.transform.localScale = new Vector3(0, 0, 0);
+        guide.transform.localScale = new Vector3(0, 0, 0);
         playing = false;
         HideBubble();
     }
@@ -80,6 +84,7 @@ public class NarratorHandler : MonoBehaviour
         bubbleText.text = text;
         bubbleText.transform.localScale = new Vector3(1,1,1);
         bubble.transform.localScale = new Vector3(1,1,1);
+        guide.transform.localScale = new Vector3(1,1,1);
     }
 
     void HideBubble()
@@ -87,6 +92,13 @@ public class NarratorHandler : MonoBehaviour
         bubbleText.text = "";
         bubbleText.transform.localScale = new Vector3(0,0,0);
         bubble.transform.localScale = new Vector3(0, 0, 0);
+        guide.transform.localScale = new Vector3(0, 0, 0);
+    }
+
+    IEnumerator HideBubble(int duration)
+    {
+        yield return new WaitForSeconds(duration);
+        HideBubble();
     }
 
     // Update is called once per frame
@@ -106,7 +118,7 @@ public class NarratorHandler : MonoBehaviour
 
             if (playing && !source.isPlaying)
             {
-                HideBubble();
+                StartCoroutine(HideBubble(3));
                 source.clip = null;
                 playing = false;
             }
