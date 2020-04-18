@@ -1,0 +1,43 @@
+.project-page {
+}
+.main-body-rows {
+    height: 10em;
+}
+
+.carousel-div {
+    position: absolute;
+    display: inline-block;
+    top: 80%;
+    left: 4%;
+    display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    color: #FFF;
+    background-color: black;
+}
+
+#tech-detail {
+    background-color: rgb(148, 191, 78);
+}
+
+.techs {
+    background-color: rgb(241,152,51);
+}
+
+#vid-wrapper{
+    float: right;
+}
+
+.center {
+    background-color: #1c76b8;
+    margin-left: calc(50% - 50vw);
+    width: 100vw;
+height: 100px;
+}
+
+.center-bar-links {
+    justify-content: center;
+    align-items: center;
+}

@@ -1,43 +1,35 @@
-
-// //   <div id="app">
-// //     <div id="nav">
-// //       <router-link to="/">Home</router-link> |
-// //       <router-link to="/about">About</router-link>
-// //     </div>
-// //     <router-view/>
-// //   </div>
-
-
-
 <template>
-<router-view>
-  <div id="app">
-    <!-- <SignIn/>
-    <AdminPage/> -->
-    <router-link to="/">SignIn</router-link>
-    <router-link to="/">AdminPage</router-link>
-  </div>
+  <router-view>
+    <div id="app">
+      <!-- <SignIn/>
+      <AdminPage/>-->
+      <router-link to="/">SignIn</router-link>
+      <router-link to="/">AdminPage</router-link>
+      <router-link to="/">ProjectPage</router-link>
+    </div>
   </router-view>
 </template>
 
 <script>
 // import SignIn from './components/SignIn.vue'
 // import AdminPage from './components/AdminPage.vue'
-
+// import AdminPage from './components/ProjectPage/index.vue'
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     // SignIn,
     // AdminPage
+    // ProjectPage
+    
   }
-}
+};
 </script>
 
 <style>
-html, 
+html,
 body {
-    background-color:#ededed;
+  background-color: #ededed;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

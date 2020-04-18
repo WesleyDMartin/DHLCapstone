@@ -1,0 +1,248 @@
+<v-app id="inspire">
+
+  <v-app-bar hide-on-scroll app color="rgb(51, 51, 51)" dark>
+    <v-toolbar-title>The Digital Human Library's Cultural Learning Tool</v-toolbar-title>
+
+    <v-spacer></v-spacer>
+
+    <v-btn icon x-large href="https://digitalhumanlibrary.com" target="_blank">
+      <img height="39em" :src="require('../../assets/dhl-greyscale.png')" />
+    </v-btn>
+    <v-btn icon x-large href="https://github.com/WesleyDMartin/DHLCapstone" target="_blank">
+      <v-icon x-large color="#FFFFFF">mdi-github</v-icon>
+    </v-btn>
+    <v-btn icon x-large href="https://dhlconestogacapstone.atlassian.net/l/c/RH3DPimy" target="_blank">
+      <img height="39em" :src="require('../../assets/confluence-greyscale.png')" />
+    </v-btn>
+  </v-app-bar>
+
+  <v-content style="background-color: #ededed">
+    <v-container>
+      <v-carousel v-show="showBanner" cycle hide-delimiter-background :show-arrows="true" height="30em">
+        <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src">
+          <div class="carousel-div display-1">
+            {{item.text}}
+          </div>
+        </v-carousel-item>
+      </v-carousel>
+      <v-container fluid>
+        <v-row justify="space-between">
+          <v-col md="6" sm="12">
+            <v-row style="position:relative">
+              <v-card-title class="display-2">The Project</v-card-title>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit orci, blandit vel pellentesque a,
+              fermentum in ante. Donec mi eros, hendrerit non suscipit quis, pulvinar a lectus. Integer aliquet quam id
+              ipsum lobortis suscipit. Nullam a mi mauris. Fusce vitae ligula lectus. Fusce in dictum dolor, in mollis
+              purus. Curabitur suscipit felis quam, et vehicula metus sagittis a. Duis mauris tellus, finibus a blandit
+              ac, condimentum vitae elit. Fusce vehicula cursus nibh, a consequat neque dapibus ut. Interdum et
+              malesuada fames ac ante ipsum primis in faucibus. Vivamus non lorem vehicula, efficitur tortor ut, gravida
+              nunc. Morbi vitae dui ullamcorper, elementum eros id, tincidunt velit. Sed vulputate est volutpat nunc
+              pretium rutrum.
+              <div id="vid-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/92odeWKdl00" frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+              </div>
+              Sed gravida nisl nisi, id auctor metus tincidunt eleifend. Fusce sed vehicula enim, ut egestas orci.
+              Mauris ultricies, turpis quis mattis tempor, metus nisi mollis mi, id lobortis neque sem at enim.
+              Vestibulum sed elementum sapien, vitae pretium ipsum. Vestibulum ante ipsum primis in faucibus orci luctus
+              et ultrices posuere cubilia Curae; Mauris et placerat ipsum. Vestibulum ultrices, orci ac fermentum
+              congue, ipsum ipsum efficitur sapien, vitae porta metus dui eu tellus. Quisque placerat in erat vel
+              posuere. Vivamus porttitor, nunc eu efficitur euismod, risus ex molestie leo, a posuere mauris mi nec
+              arcu. Maecenas finibus pellentesque volutpat.
+            </v-row>
+          </v-col>
+          <v-col md="5" sm="12">
+            <v-row>
+              <v-card-title class="display-2">The Story</v-card-title>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit orci, blandit vel pellentesque a,
+              fermentum in ante. Donec mi eros, hendrerit non suscipit quis, pulvinar a lectus. Integer aliquet quam id
+              ipsum lobortis suscipit. Nullam a mi mauris. Fusce vitae ligula lectus. Fusce in dictum dolor, in mollis
+              purus. Curabitur suscipit felis quam, et vehicula metus sagittis a. Duis mauris tellus, finibus a blandit
+              ac, condimentum vitae elit. Fusce vehicula cursus nibh, a consequat neque dapibus ut. Interdum et
+              malesuada fames ac ante ipsum primis in faucibus. Vivamus non lorem vehicula, efficitur tortor ut, gravida
+              nunc. Morbi vitae dui ullamcorper, elementum eros id, tincidunt velit. Sed vulputate est volutpat nunc
+              pretium rutrum.
+
+              Sed gravida nisl nisi, id auctor metus tincidunt eleifend. Fusce sed vehicula enim, ut egestas orci.
+              Mauris ultricies, turpis quis mattis tempor, metus nisi mollis mi, id lobortis neque sem at enim.
+              Vestibulum sed elementum sapien, vitae pretium ipsum. Vestibulum ante ipsum primis in faucibus orci luctus
+              et ultrices posuere cubilia Curae; Mauris et placerat ipsum. Vestibulum ultrices, orci ac fermentum
+              congue, ipsum ipsum efficitur sapien, vitae porta metus dui eu tellus. Quisque placerat in erat vel
+              posuere. Vivamus porttitor, nunc eu efficitur euismod, risus ex molestie leo, a posuere mauris mi nec
+              arcu. Maecenas finibus pellentesque volutpat.
+            </v-row>
+          </v-col>
+        </v-row>
+        <v-container fill-height fluid>
+          <v-row justify="center">
+            <v-col justify="center" cols="auto">
+              <v-btn x-large color="#1c76b8" href="https://digitalhumanlibrary.com" target="_blank" v-on="on">
+                <v-row class="center-bar-links">
+                  <img height="50px" :src="require('../../assets/dhl-logo.png')" />
+                  <span class="pl-1 pr-5 headline">Digital Human Library</span>
+                </v-row>
+              </v-btn>
+            </v-col>
+            <v-col justify="center" cols="auto">
+              <v-btn x-large color="#1c76b8" href="https://github.com/WesleyDMartin/DHLCapstone" target="_blank"
+                v-on="on">
+                <v-row class="center-bar-links">
+                  <v-icon size="50" color="#2B414D">mdi-github</v-icon>
+                  <span class="pl-1 pr-5 headline">GitHub Code</span>
+                </v-row>
+              </v-btn>
+            </v-col>
+            <v-col justify="center" cols="auto">
+              <v-btn x-large color="#1c76b8" href="https://dhlconestogacapstone.atlassian.net/l/c/RH3DPimy"
+                target="_blank" v-on="on">
+                <v-row class="center-bar-links" justify="center">
+                  <img height="50px" :src="require('../../assets/confluence.png')" />
+                  <span class="pl-1 pr-5 headline">Project Documentation</span>
+                </v-row>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
+        <v-row>
+          <v-col>
+            <v-row justify="center">
+              <v-card-title class="display-1">Our Technologies</v-card-title>
+            </v-row>
+            <v-row justify="center">
+              <v-col md="3" sm="12">
+                <v-row v-for="(tech, i) in technologies" :key="i">
+                  <v-card @click="updateTech(i)" class="techs ma-2" width="100%" flat>
+                    <v-card-title>{{tech.tech}} </v-card-title>
+                  </v-card>
+                </v-row>
+              </v-col>
+              <v-col md="auto" sm="12">
+                <v-card id="tech-detail" class="pa-2 ma-2" flat>
+                  <v-row>
+                    <v-col>
+                      <v-row>
+                        <v-card-title>{{currentTechnology.tech}} </v-card-title>
+                        <v-card-text>{{currentTechnology.description}}</v-card-text>
+                      </v-row>
+                      <v-card-actions>
+
+                        <v-btn v-for="(link, i) in currentTechnology.links" :href="link.url" :key="i" text>
+                          {{link.value}}
+                        </v-btn>
+                      </v-card-actions>
+                    </v-col>
+                    <v-col>
+                      <v-img class="white--text" align-self="stretch" width="530px" :src="currentTechnology.image">
+                      </v-img>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
+            </v-row>
+
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-row justify="center">
+              <v-card-title class="display-1">Our Team</v-card-title>
+            </v-row>
+            <v-row justify="center">
+              <v-col md="3" sm="12">
+                <v-row v-for="(person, i) in people" :key="i">
+                  <v-card @click="updatePerson(i)" class="techs ma-2" width="100%" flat>
+                    <v-card-title>{{person.tech}} </v-card-title>
+                  </v-card>
+                </v-row>
+              </v-col>
+              <v-col md="auto" sm="12">
+                <v-card id="tech-detail" class="pa-2 ma-2" flat>
+                  <v-row align-content="space-between">
+                    <v-col>
+                      <v-row>
+                        <v-card-title>{{currentPerson.tech}} </v-card-title>
+                        <v-card-text>{{currentPerson.description}}</v-card-text>
+                      </v-row>
+                      <v-card-actions>
+
+                        <v-btn v-for="(link, i) in currentPerson.links" :href="link.url" :key="i" text>
+                          {{link.value}}
+                        </v-btn>
+                      </v-card-actions>
+                    </v-col>
+                    <v-col>
+                      <v-img class="white--text" align-self="stretch" width="230px" :src="currentPerson.image">
+                      </v-img>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
+            </v-row>
+
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+              <v-container fluid>
+                <v-row justify="center">
+                  <v-card-title class="display-1">Gallery</v-card-title>
+                </v-row>
+                <v-row>
+                  <v-col
+                    v-for="(shot, i) in screenshots"
+                    :key="i"
+                    class="d-flex child-flex"
+                    cols="2"
+                  >
+                    <v-card flat tile class="d-flex">
+                      <v-img
+                        :src="shot"
+                        aspect-ratio="1"
+                        class="grey lighten-2"
+                      >
+                      </v-img>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-container>
+          </v-col>
+        </v-row>
+        <!-- <main-body-row v-for="(row,i) in rows" :key="i" :text="row.text" rowheight="400px" :direction="row.direction" :assetpath="row.src" /> -->
+
+      </v-container>
+
+
+    </v-container>
+  </v-content>
+  <v-footer color="rgb(51, 51, 51)" app>
+    <span class="white--text">&copy; 2019</span>
+    <!-- <v-row align="center" justify="center">
+      <v-tooltip right>
+        <template v-slot:activator="{ on }">
+          <v-btn icon x-large href="https://digitalhumanlibrary.com" target="_blank" v-on="on">
+            <img height="39em" :src="require('../../assets/dhl-logo.png')" />
+          </v-btn>
+        </template>
+        <span>Digital Human Library</span>
+      </v-tooltip>
+      <v-tooltip right>
+        <template v-slot:activator="{ on }">
+          <v-btn icon x-large href="https://github.com/WesleyDMartin/DHLCapstone" target="_blank" v-on="on">
+            <v-icon x-large color="#2B414D">mdi-github</v-icon>
+          </v-btn>
+        </template>
+        <span>GitHub</span>
+      </v-tooltip>
+      <v-tooltip right>
+        <template v-slot:activator="{ on }">
+          <v-btn icon x-large href="https://dhlconestogacapstone.atlassian.net/l/c/RH3DPimy" target="_blank"
+            v-on="on">
+            <img height="39em" :src="require('../../assets/confluence.png')" />
+          </v-btn>
+        </template>
+        <span>Confluence Documentation</span>
+      </v-tooltip>
+    </v-row> -->
+  </v-footer>
+</v-app>
