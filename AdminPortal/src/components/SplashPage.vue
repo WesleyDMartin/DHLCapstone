@@ -2,7 +2,7 @@
 
   <section class= "splash-page">
     <div class="square" v-for="index in rows" :key="index" :style="styles">
-        <div class="content" :style="{ backgroundImage: 'url(' + getImage() + ')' }">
+        <div class="content" :style="{ backgroundImage: 'url(' + require('@/assets/Backgrounds/' + index + '.jpg') + ')' }">
         </div>
     </div>
   <div class="center">
@@ -50,12 +50,6 @@
         var x = Math.floor(Math.random()*16777215).toString(16);
         return x
       },
-      getImage(){
-        var x = this.picIndex % 28 + 1
-        this.picIndex += 1
-        console.log(this.picIndex)
-        return require('@/assets/Backgrounds/' + x + '.jpg')
-      },
       getPercentage(goal){
         console.log(goal)
         var counts = [20,25,33.33,50]
@@ -68,16 +62,10 @@
     },
     computed: {
       rows() {
-
         var area = (this.height * this.width)
-        console.log("Area " + area)
         var imageSize = (this.width*(this.percentage/100)*this.width*(this.percentage/100))
-        console.log("imageSize " + imageSize)
         var extra = Math.max(this.width/this.height, this.height/this.width)
-        console.log("extra " + extra)
-        console.log("count " + area/imageSize)
         var x = (area / imageSize) * extra
-        console.log("x " + x)
         return Math.ceil(x)
       }
     }
@@ -119,9 +107,8 @@
   background-color: grey;
 }
 
-
 .btn {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .button {
