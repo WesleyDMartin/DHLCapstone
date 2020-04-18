@@ -2,7 +2,7 @@
 
   <section class= "splash-page">
     <div class="square" v-for="index in rows" :key="index" :style="styles">
-        <div class="content" :style="{ backgroundImage: 'url(' + require('@/assets/Backgrounds/' + index + '.jpg') + ')' }">
+        <div class="content" :style="{ backgroundImage: 'url(' + require('@/assets/Backgrounds/' + (index % 29 + 1) + '.jpg') + ')' }">
         </div>
     </div>
   <div class="center">
