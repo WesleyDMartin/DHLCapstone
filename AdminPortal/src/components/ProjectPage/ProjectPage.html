@@ -76,7 +76,7 @@
         </v-row>
         <v-container fill-height fluid>
           <v-row justify="center">
-            <v-col justify="center" cols="auto">
+            <v-col justify="center" sm="12" md="auto">
               <v-btn x-large color="#1c76b8" href="https://digitalhumanlibrary.com" target="_blank" v-on="on">
                 <v-row class="center-bar-links">
                   <img height="50px" :src="require('../../assets/dhl-logo.png')" />
@@ -84,7 +84,7 @@
                 </v-row>
               </v-btn>
             </v-col>
-            <v-col justify="center" cols="auto">
+            <v-col justify="center" sm="12" md="auto">
               <v-btn x-large color="#1c76b8" href="https://github.com/WesleyDMartin/DHLCapstone" target="_blank"
                 v-on="on">
                 <v-row class="center-bar-links">
@@ -93,7 +93,7 @@
                 </v-row>
               </v-btn>
             </v-col>
-            <v-col justify="center" cols="auto">
+            <v-col justify="center" sm="12" md="auto">
               <v-btn x-large color="#1c76b8" href="https://dhlconestogacapstone.atlassian.net/l/c/RH3DPimy"
                 target="_blank" v-on="on">
                 <v-row class="center-bar-links" justify="center">
@@ -110,20 +110,21 @@
               <v-card-title class="display-1">Our Technologies</v-card-title>
             </v-row>
             <v-row justify="center">
-              <v-col md="3" sm="12">
+              <v-col class="ma-n2" md="2" sm="12" min-width="200px">
                 <v-row v-for="(tech, i) in technologies" :key="i">
-                  <v-card @click="updateTech(i)" class="techs ma-2" width="100%" flat>
+                  <v-card hover @click="updateTech(i)" class="techs ma-2" width="100%" flat>
                     <v-card-title>{{tech.tech}} </v-card-title>
                   </v-card>
                 </v-row>
               </v-col>
-              <v-col md="auto" sm="12">
-                <v-card id="tech-detail" class="pa-2 ma-2" flat>
-                  <v-row>
+              <v-col md="7" sm="12">
+                <v-card id="tech-detail" flat>
+                  <v-row align-content="space-between">
                     <v-col>
                       <v-row>
                         <v-card-title>{{currentTechnology.tech}} </v-card-title>
                         <v-card-text>{{currentTechnology.description}}</v-card-text>
+                        <v-card-text>{{currentTechnology.use}}</v-card-text>
                       </v-row>
                       <v-card-actions>
 
@@ -132,8 +133,9 @@
                         </v-btn>
                       </v-card-actions>
                     </v-col>
-                    <v-col>
-                      <v-img class="white--text" align-self="stretch" width="530px" :src="currentTechnology.image">
+                    <v-col class="ma-0 pa-0">
+                      <v-img class="white--text" height="100%" max-width="600px" ratio="1" :src="currentTechnology.image"
+                        style="border-top-right-radius: 4px; border-bottom-right-radius: 4px; float: right;">
                       </v-img>
                     </v-col>
                   </v-row>
@@ -149,15 +151,15 @@
               <v-card-title class="display-1">Our Team</v-card-title>
             </v-row>
             <v-row justify="center">
-              <v-col md="3" sm="12">
+              <v-col class="ma-n2" md="2" sm="12" min-width="200px">
                 <v-row v-for="(person, i) in people" :key="i">
-                  <v-card @click="updatePerson(i)" class="techs ma-2" width="100%" flat>
+                  <v-card hover @click="updatePerson(i)" class="techs ma-2" width="100%" flat>
                     <v-card-title>{{person.tech}} </v-card-title>
                   </v-card>
                 </v-row>
               </v-col>
               <v-col md="auto" sm="12">
-                <v-card id="tech-detail" class="pa-2 ma-2" flat>
+                <v-card id="tech-detail" flat>
                   <v-row align-content="space-between">
                     <v-col>
                       <v-row>
@@ -171,8 +173,9 @@
                         </v-btn>
                       </v-card-actions>
                     </v-col>
-                    <v-col>
-                      <v-img class="white--text" align-self="stretch" width="230px" :src="currentPerson.image">
+                    <v-col class="ma-0 pa-0">
+                      <v-img class="white--text" align-self="stretch" width="300px" :src="currentPerson.image"
+                        style="border-top-right-radius: 4px; border-bottom-right-radius: 4px; float: right;">
                       </v-img>
                     </v-col>
                   </v-row>
@@ -184,33 +187,43 @@
         </v-row>
         <v-row>
           <v-col>
-              <v-container fluid>
-                <v-row justify="center">
-                  <v-card-title class="display-1">Gallery</v-card-title>
-                </v-row>
-                <v-row>
-                  <v-col
-                    v-for="(shot, i) in screenshots"
-                    :key="i"
-                    class="d-flex child-flex"
-                    cols="2"
-                  >
-                    <v-card flat tile class="d-flex">
-                      <v-img
-                        :src="shot"
-                        aspect-ratio="1"
-                        class="grey lighten-2"
-                      >
-                      </v-img>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-container>
+            <v-container fluid>
+              <v-row justify="center">
+                <v-card-title class="display-1">Gallery</v-card-title>
+              </v-row>
+              <v-row justify="center">
+                <v-card-title class="subtitle-1 mt-n6">Click Each Image</v-card-title>
+              </v-row>
+              <v-row>
+                <v-col v-for="(shot, i) in screenshots" :key="i" class="d-flex child-flex" cols="2">
+                  <v-card hover flat tile class="d-flex">
+                    <v-img :src="shot.path" aspect-ratio="1" class="grey lighten-2" @click="updateGalleryImage(shot)"
+                      style="cursor: pointer">
+                    </v-img>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
           </v-col>
         </v-row>
         <!-- <main-body-row v-for="(row,i) in rows" :key="i" :text="row.text" rowheight="400px" :direction="row.direction" :assetpath="row.src" /> -->
 
       </v-container>
+
+
+      <v-dialog v-model="galleryImage" max-width="75%">
+        <v-card>
+          <v-card-title class="headline">{{currentGalleryImage.title}}</v-card-title>
+          <v-img :src="currentGalleryImage.path" min-wdith="500px" width="100%" class="grey lighten-2">
+          </v-img>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="green darken-1" text @click="galleryImage = false">
+              CLOSE
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
 
 
     </v-container>

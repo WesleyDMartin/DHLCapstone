@@ -8,10 +8,10 @@
   <div class="center">
     <img class="logo" src="../assets/dhl-people.png">
   </div>
-  <div class="button" style="top: -20%">
+  <div class="button" style="top: 0px">
               <v-btn class="btn" color="#1c76b8" to="/ProjectPage" x-large>Learn More About Our Project</v-btn>
   </div>
-  <div class="button" style="top: -00%">
+  <div class="button" style="top: 200px">
               <v-btn class="btn" color="#1c76b8" to="/SignIn" x-large>Go to the Administrator Dashbaord</v-btn>
   </div>
   </section>
@@ -79,6 +79,7 @@
   overflow: hidden;
   height: 100vh;
   width: 100vw;
+  min-width: 500px;
   position: absolute;
   top: 0;
   left: 0;
@@ -86,14 +87,14 @@
 
 .logo {
   max-width: 500px;
-  min-width: 220px;
+  min-width: 420px;
   width: 50%;
 }
 
 .center {
   position: absolute;
   margin: auto;
-  top: -50%;
+  top: -300px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -109,6 +110,8 @@
 
 .btn {
   color: #ffffff;
+  max-width: 500px;
+  min-width: 220px;
 }
 
 .button {
@@ -117,7 +120,6 @@
   right: 0;
   bottom: 0;
   left: 0;
-  width: 100%;
   height: 10%;
   border-radius: 3px;
   display: flex;
