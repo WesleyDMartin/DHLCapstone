@@ -46,8 +46,8 @@ export default {
           description: "A cross platform game engine and development platform",
           use: "Unity is how we built the code base and combined all aspects of our platform. We used it to create the 3D world where the guide can answer questions. Unity integrates well with the Oculus platform, and as it is C# based, we were easily able to integrate our main application with the Rails API, Google's APIs, and the TensorFlow service.",
           links: [{
-            value: "More Info",
-            url: "https://www.google.com"
+            value: "Out Unity Code",
+            url: "https://github.com/WesleyDMartin/DHLCapstone/tree/master/VR/Practice"
           }],
           image: require("../../assets/shots/UnityBTS.png")
         },
@@ -55,51 +55,48 @@ export default {
           tech: "Oculus",
           description: "Used to create Virtual Reality worlds",
           use: "Using the Oculus platform, we were able to create a truly immersive experience for our platforms users. The Oculus VR headset allows users to stand in front of the guide and ask them questions directly, and get both spoken and written responses back. The Oculus is the ideal way for a user to experience the 360 videos which our platform supports, allowing the user to feel like they are IN the place where the video was recorded.",
-          links: [{
-            value: "More Info",
-            url: "https://www.google.com"
-          }],
+          links: [],
           image: require("../../assets/shots/Controls.png")
-        },
-        {
-          tech: "TensorFlow",
-          description: "An end to end Machine Learning platform",
-          use: "TensorFlow is the platform we used to train the sentence encoder, which in turn is how we matched user questions to the most likely question and answer. E.g. A user asks 'What is a wedding like where you are form', and TensorFlow could match on 'What are marriage traditions like in your culture', or 'Do people like to get married where you live' (Assuming either of those questions had been added to the dashboard)",
-          links: [{
-            value: "More Info",
-            url: "https://www.google.com"
-          }],
-          image: require("../../assets/shots/Controls.png")
-        },
-        {
-          tech: "Google Speech to Text API",
-          description: "Google's Speech to Text and Text to Speech APIs are what we used to convert between spoken word and text",
-          use: "User's questions are submitted to the API, and the text response is then sent to the Tensor Flow service. We also use it to generate the audio clips spoken by the guide in the Virtual Reality world",
-          links: [{
-            value: "More Info",
-            url: "https://www.google.com"
-          }],
-          image: require("../../assets/shots/Controls.png")
-        },
-        {
-          tech: "Ruby/Rails",
-          description: "Used to build RESTful APIs and single page web apps",
-          use: "We used Ruby on Rails to build the API which provide the supporte cultures, questions, and answers to the Virtual Reality environment. The content is submitted to the API Via the Administrative Portal web app",
-          links: [{
-            value: "More Info",
-            url: "https://www.google.com"
-          }],
-          image: require("../../assets/shots/UnityBTS.png")
         },
         {
           tech: "Vue",
           description: "Used to build snappy user interfaces and single page web apps",
           use: "We used Vue to build the Administrative Panel for our application. We structured our front end around this framework, as well as all of the applications promotional web pages.",
           links: [{
-            value: "More Info",
-            url: "https://www.google.com"
+            value: "Vue Application Code",
+            url: "https://github.com/WesleyDMartin/DHLCapstone/tree/master/AdminPortal"
           }],
-          image: require("../../assets/shots/UnityBTS.png")
+          image: require("../../assets/shots/AdminPage.png")
+        },
+        {
+          tech: "TensorFlow",
+          description: "An end to end Machine Learning platform",
+          use: "TensorFlow is the platform we used to train the sentence encoder, which in turn is how we matched user questions to the most likely question and answer. E.g. A user asks 'What is a wedding like where you are form', and TensorFlow could match on 'What are marriage traditions like in your culture', or 'Do people like to get married where you live' (Assuming either of those questions had been added to the dashboard). Pictured to the right, you can see that the question 'how do you say hello' was asked, and that text is compared to each supported question. The best match is then returned.",
+          links: [{
+            value: "Our TensorFlow Script",
+            url: "https://github.com/WesleyDMartin/DHLCapstone/blob/master/PythonTest/service.py"
+          }],
+          image: require("../../assets/shots/tensorQuestionMatching.png")
+        },
+        {
+          tech: "Google Speech to Text API",
+          description: "Google's Speech to Text and Text to Speech APIs are what we used to convert between spoken word and text",
+          use: "User's questions are submitted to the API, and the text response is then sent to the Tensor Flow service. We also use it to generate the audio clips spoken by the guide in the Virtual Reality world. Pictured to the right you can see the service in action, recieving requests from the VR application, and passing those along to either the google API or the TensorFlow service.",
+          links: [{
+            value: "Our Google API Interfaces",
+            url: "https://github.com/WesleyDMartin/DHLCapstone/tree/master/SpeechRecognizer"
+          }],
+          image: require("../../assets/shots/speechAPIService.png")
+        },
+        {
+          tech: "Ruby/Rails",
+          description: "Used to build RESTful APIs and single page web apps",
+          use: "We used Ruby on Rails to build the API which provide the supporte cultures, questions, and answers to the Virtual Reality environment. The content is submitted to the API Via the Administrative Portal web app",
+          links: [{
+            value: "Our Rails Implementation",
+            url: "https://github.com/WesleyDMartin/DHLCapstone/tree/master/VirtualLearnerApi"
+          }],
+          image: require("../../assets/shots/cultureApi.png")
         }
       ],
       people: [
@@ -141,6 +138,7 @@ export default {
         }
       ],
       screenshots: [
+        { title: "The Guide Welcome Shot", path: require("../../assets/shots/WelcomeShot.png") },
         { title: "A Sample 2D Video Response", path: require("../../assets/shots/2DVideoResponse.png") },
         { title: "A Sample 3D Video Response", path: require("../../assets/shots/3DVideoResponse.png") },
         { title: "A Sample 3D Video Response", path: require("../../assets/shots/3DVideoResponse2.png") },
@@ -161,7 +159,9 @@ export default {
         { title: "Text With 2D Video", path: require("../../assets/shots/TextWith2D.png") },
         { title: "Unity Behind the Scenes", path: require("../../assets/shots/UnityBTS.png") },
         { title: "Video Player Behind the Scenes", path: require("../../assets/shots/VideoPlayersBTS.png") },
-        { title: "The Guide Welcome Shot", path: require("../../assets/shots/WelcomeShot.png") }
+        { title: "The Culture API in Action", path: require("../../assets/shots/cultureApi.png") },
+        { title: "The Speech Synthesizer Service in Action", path: require("../../assets/shots/speechAPIService.png") },
+        { title: "TensorFlow in Action", path: require("../../assets/shots/tensorQuestionMatching.png") },
       ]
     }
   },
