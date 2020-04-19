@@ -120,7 +120,7 @@
               <v-col md="7" sm="12">
                 <v-card id="tech-detail" flat>
                   <v-row align-content="space-between">
-                    <v-col>
+                    <v-col class="ml-4">
                       <v-row>
                         <v-card-title>{{currentTechnology.tech}} </v-card-title>
                         <v-card-text>{{currentTechnology.description}}</v-card-text>
@@ -154,17 +154,17 @@
               <v-col class="ma-n2" md="2" sm="12" min-width="200px">
                 <v-row v-for="(person, i) in people" :key="i">
                   <v-card hover @click="updatePerson(i)" class="techs ma-2" width="100%" flat>
-                    <v-card-title>{{person.tech}} </v-card-title>
+                    <v-card-title>{{person.name}} </v-card-title>
                   </v-card>
                 </v-row>
               </v-col>
-              <v-col md="auto" sm="12">
+              <v-col md="6" offset-md="-1" sm="12">
                 <v-card id="tech-detail" flat>
                   <v-row align-content="space-between">
-                    <v-col>
+                    <v-col class="ml-4">
                       <v-row>
-                        <v-card-title>{{currentPerson.tech}} </v-card-title>
-                        <v-card-text>{{currentPerson.description}}</v-card-text>
+                        <v-card-title>{{currentPerson.name}} </v-card-title>
+                        <v-card-text>{{currentPerson.role}}</v-card-text>
                       </v-row>
                       <v-card-actions>
 
