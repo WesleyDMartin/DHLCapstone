@@ -20,21 +20,21 @@
     <v-container>
       <v-carousel v-show="showBanner" cycle hide-delimiter-background :show-arrows="true" height="30em">
         <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src">
-          <div class="carousel-div display-1">
+          <div class="carousel-div display-1" style="min-width: 540px;">
             {{item.text}}
           </div>
         </v-carousel-item>
       </v-carousel>
-      <v-container fluid>
+      <v-container>
         <v-row justify="space-between">
-          <v-col md="6" sm="12">
-            <v-row style="position:relative">
+          <v-col md="6" cols="12">
+            <v-row>
               <v-card-title class="display-2">The Project</v-card-title>
-              <p>This project evolved from the story where Leigh Cassel wanted to create a unique experience 
-                for the people which will allow them to learn about different cultures within the comfort of their own home. 
-                The experience will be provided in the virtual reality format. To be able to accomplish this unique experience,
-                 multiple technologies has been put together. <b>To assure everybody’s safety, no vibranium was used to build this 
-                 project. </b>
+              <p>This project evolved from Leigh Cassel's desire to create a unique experience 
+                which will allow students to learn about different cultures from the safety of their own classroom. 
+                Our goal is to provided a way to truly experience this learning in a Virtual Reality application. To be able to accomplish this unique experience,
+                 multiple different technologies have been brought together. To assure everybody’s safety, no vibranium was used to build this 
+                 project.
                 </p>
               
                  <div id="vid-wrapper">
@@ -50,7 +50,7 @@
               </p>
             </v-row>
           </v-col>
-          <v-col md="5" sm="12">
+          <v-col md="5" cols="12">
             <v-row>
               <v-card-title class="display-2">The Story</v-card-title>
               <p>
@@ -133,7 +133,7 @@
                 <v-card id="tech-detail" flat>
                   <v-row>
                     <v-col md="5" sm="12">
-                      <v-row>
+                      <v-row class="pl-3 pr-3">
                         <v-card-title>{{currentTechnology.tech}} </v-card-title>
                         <v-card-text>{{currentTechnology.description}}</v-card-text>
                         <v-card-text>{{currentTechnology.use}}</v-card-text>
@@ -164,18 +164,18 @@
               <v-card-title class="display-1">Our Team</v-card-title>
             </v-row>
             <v-row justify="center">
-              <v-col class="ma-n2" md="2" sm="12" min-width="200px">
+              <v-col class="ma-n2" md="2" cols="12">
                 <v-row v-for="(person, i) in people" :key="i">
                   <v-card hover @click="updatePerson(i)" class="techs ma-2" width="100%" flat>
                     <v-card-title>{{person.name}} </v-card-title>
                   </v-card>
                 </v-row>
               </v-col>
-              <v-col md="6" offset-md="-1" sm="12">
+              <v-col md="8" sm="12">
                 <v-card id="tech-detail" flat>
                   <v-row align-content="space-between">
-                    <v-col md="5" sm="12">
-                      <v-row>
+                    <v-col  md="5" sm="12">
+                      <v-row class="pl-3 pr-3">
                         <v-card-title>{{currentPerson.name}} </v-card-title>
                         <v-card-text>{{currentPerson.role}}</v-card-text>
                       </v-row>
@@ -186,8 +186,8 @@
                         </v-btn>
                       </v-card-actions>
                     </v-col>
-                    <v-col md="7" sm="12" class="pt-0 pr-0 pb-0">
-                      <v-img class="white--text mr-3" align-self="stretch" :src="currentPerson.image"
+                    <v-col md="7" cols="12" class="pt-0 pr-0 pb-0">
+                      <v-img contain class="white--text mr-3" max-height="400px" ratio="1" align-self="stretch" :src="currentPerson.image"
                         style="border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
                       </v-img>
                     </v-col>
