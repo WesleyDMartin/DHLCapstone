@@ -55,31 +55,36 @@
           <v-col md="5" sm="12">
             <v-row>
               <v-card-title class="display-2">The Story</v-card-title>
-              <p>Accessing educational material and the quality of education still remains a challenge in different parts of the world. 
-              Digital Human Library addresses that by creating connections-based learning opportunities for teachers and students through 
-              variety of social innovation projects informed by research. Connection-based learning/education is an 
-              approach focuses on building relationships and partnerships between students, teachers, families, 
-              experts and organizations. 
-            </p>
+              <p>
+                When we think about learning, we often imagine books, pencils, and paper; however, we now understand
+                that learning happens in many different ways.
+                Teachers know that interactions, relationships, and hands-on experiences are essential within the
+                learning environment.
+                The Digital Human Library is one of the first educational platforms to focus on learning through human
+                connections. This Connection-based learning/education is an
+                approach focused on building relationships and partnerships between students, teachers, families,
+                experts and organizations. The DHL aims to "create a Cultural Learning Catelogue that allows users to
+                interact with cultural experts.
+              </p>
 
-            <p>
-              When it comes to education, often time people focus on only academia. One area that often gets overlooked i
-              s the culture. Canada being the melting pot of cultures where people from different ethnicity collaborates 
-              side by side, but do not know enough about each-others culture. This Project is here to address that 
-              educational side by creating a more personalized experience. 
-            </p>
+              <p>
+                Creating an interactive catelogue means that students will obtain a deeper understanding of the many
+                cultures that exist around the world.
+                The founded of The Digital Human Library, Leigh Cassell, explains that "The need for cultural
+                understanding and empathy is, and will continue to be, at the forefront of necessary learning in our
+                increasingly globalized world." The Digital Human Library provides educators and students with a
+                resource that uses first-hand expereinces to deliver information.
 
-            <p>
-              This project has created a system where people will be able to ask questions to the 
-              system or VR guide and the guide will be able to provide a text-based answer along with video 
-              information in a virtual reality format. Depending on availability, the viewer will be able to 
-              explore 360 videos along with 2D videos. This will allow people to be able to connect and 
-              understand people from other culture from a broader perspective and allow people to have better 
-              cross-culture communication. The system currently supports only a few cultures at the moment. 
-              However, in the future, it will update to cover a lot more cultures that will allow people to explore 
-              the cultural horizon.
-            </p>
-              
+                <p>
+                  Our project aimed to create a Virtual Reality experience where people are able to ask questions to the
+                  system or VR guide. The guide will be able to provide a text-based answer, along with video
+                  information, in a virtual reality format. Depending on availability, the viewer will be able to
+                  explore 360 videos as well as regular videos. This format will allow people to better understand
+                  connect and
+                  with people from various cultures. While the system currently incorporates only a few different
+                  cultures, it will continue to be updated to eventually allow users to vitrually travel the world.
+                </p>
+
             </v-row>
           </v-col>
         </v-row>
@@ -128,8 +133,8 @@
               </v-col>
               <v-col md="10" sm="12">
                 <v-card id="tech-detail" flat>
-                  <v-row align-content="space-between">
-                    <v-col class="ml-4">
+                  <v-row>
+                    <v-col md="5" sm="12">
                       <v-row>
                         <v-card-title>{{currentTechnology.tech}} </v-card-title>
                         <v-card-text>{{currentTechnology.description}}</v-card-text>
@@ -142,9 +147,10 @@
                         </v-btn>
                       </v-card-actions>
                     </v-col>
-                    <v-col class="ma-0 pa-0">
-                      <v-img contain class="white--text mr-3" height="100%" max-width="900px" ratio="1" :src="currentTechnology.image"
-                        style="border-top-right-radius: 4px; border-bottom-right-radius: 4px; float: right;">
+                    <v-col md="7" sm="12" class="pt-0 pr-0 pb-0">
+                      <v-img class="white--text mr-3" :src="currentTechnology.image"
+                        @click="updateGalleryImage({title: currentTechnology.tech, path: currentTechnology.image})"
+                        style="border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
                       </v-img>
                     </v-col>
                   </v-row>
@@ -170,7 +176,7 @@
               <v-col md="6" offset-md="-1" sm="12">
                 <v-card id="tech-detail" flat>
                   <v-row align-content="space-between">
-                    <v-col class="ml-4">
+                    <v-col md="5" sm="12">
                       <v-row>
                         <v-card-title>{{currentPerson.name}} </v-card-title>
                         <v-card-text>{{currentPerson.role}}</v-card-text>
@@ -182,9 +188,9 @@
                         </v-btn>
                       </v-card-actions>
                     </v-col>
-                    <v-col class="ma-0 pa-0">
-                      <v-img class="white--text" align-self="stretch" width="300px" :src="currentPerson.image"
-                        style="border-top-right-radius: 4px; border-bottom-right-radius: 4px; float: right;">
+                    <v-col md="7" sm="12" class="pt-0 pr-0 pb-0">
+                      <v-img class="white--text mr-3" align-self="stretch" :src="currentPerson.image"
+                        style="border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
                       </v-img>
                     </v-col>
                   </v-row>
