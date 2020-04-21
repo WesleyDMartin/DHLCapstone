@@ -145,7 +145,7 @@ form {
   }
 
   input {
-    background-color: #FFF;
+    background-color: #ededed;
     border: none;
     padding: 10px 15px;
     margin: 6px 0;

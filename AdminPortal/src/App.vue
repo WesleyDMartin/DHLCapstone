@@ -29,7 +29,7 @@ export default {
 <style>
 html,
 body {
-  background-color: #ededed;
+  background-color: white;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

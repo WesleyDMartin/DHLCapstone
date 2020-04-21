@@ -89,6 +89,10 @@
   max-width: 500px;
   min-width: 420px;
   width: 50%;
+  outline: 5px solid;
+  outline-color: grey; 
+  background-color: white;
+  padding: 5px;
 }
 
 .center {

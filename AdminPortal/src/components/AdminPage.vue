@@ -1,123 +1,116 @@
 <template>
-  <v-container fluid class="pa-n4">
-    <v-toolbar color="#333333" dark height="41px">
-      <v-toolbar-title>Admin Dashboard</v-toolbar-title>
+  <v-app id="inspire" style="background-color: #ededed;">
+    <v-container fluid class="pa-n4">
+      <v-toolbar color="#333333" dark height="41px">
+        <v-toolbar-title>Admin Dashboard</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-      <v-toolbar-side-icon>
-        <a href="https://www.digitalhumanlibrary.com/">
-          <v-img class="mr-3" src="../assets/dhl-logo.png" height="100%" width="50px"></v-img>
-        </a>
-      </v-toolbar-side-icon>
-    </v-toolbar>
+        <v-spacer></v-spacer>
+        <v-toolbar-side-icon>
+          <a href="https://www.digitalhumanlibrary.com/">
+            <v-img class="mr-3" src="../assets/dhl-logo.png" height="100%" width="50px"></v-img>
+          </a>
+        </v-toolbar-side-icon>
+      </v-toolbar>
 
-    <v-container fluid>
-      <v-row>
-        <v-col>
-          <v-card :color="color">
-            <v-card-title v-text="cultures.title"></v-card-title>
-            <v-card-text>
-              <v-row
-                class="mb-4 question"
-                justify="center"
-                no-gutters
-                v-for="(item) in paginatedDataCulture"
-                :key="item.id"
-              >
-                <p>
-                  <img
-                    width="100"
-                    height="140"
-                    class="delete"
-                    v-on:click="deleteCulture(item.id)"
-                    :src="require('../assets/delete.png')"
-                  />
-                  <span
-                    class="title"
-                    v-on:click="updateQuestions(item.name, 0)"
-                    v-on:hover="hoverCulture(item.name)"
-                  >{{item.name}}</span>
-                </p>
-              </v-row>
-              <v-row v-show="pageCountCulture > 1">
-                <v-col align="center">
-                  <button v-on:click="prevPageCulture" :disabled="pageNumberCulture==0">Previous</button>
-                  <span>- {{pageNumberCulture+1}} -</span>
-                  <button
-                    v-on:click="nextPageCulture"
-                    :disabled="pageNumberCulture >= pageCountCulture - 1"
-                  >Next</button>
-                </v-col>
-              </v-row>
-              <v-form v-on:submit.prevent="onSubmitCulture">
-                <v-text-field ref="culturename" width="25%" placeholder="Add New Culture"></v-text-field>
-                <button>Add Culture</button>
-              </v-form>
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card :color="color">
-            <v-card-title v-text="questions.title"></v-card-title>
-            <v-card-text>
-              <v-row class="mb-4 question" v-for="(item) in paginatedDataQuestion" :key="item.id">
-                <p>
-                  <img
-                    class="delete"
-                    v-on:click="deleteQuestion(item.id)"
-                    :src="require('../assets/delete.png')"
-                  />
-                  <span v-on:click="updateResponse(item)">{{item.value}}</span>
-                </p>
-              </v-row>
-              <v-row v-show="pageCountQuestion > 1">
-                <v-col align="center">
-                  <button v-on:click="prevPageQuestion" :disabled="pageNumberQuestion==0">Previous</button>
-                  <span>- {{pageNumberQuestion+1}} -</span>
-                  <button
-                    v-on:click="nextPageQuestion"
-                    :disabled="pageNumberQuestion >= pageCountQuestion - 1"
-                  >Next</button>
-                </v-col>
-              </v-row>
-              <v-form v-on:submit.prevent="onSubmitQuestion">
-                <v-text-field ref="question" width="25%" placeholder="Question"></v-text-field>
-                <v-text-field ref="text_answer" width="25%" placeholder="Text Answer"></v-text-field>
-                <v-text-field ref="answerurl" width="25%" placeholder="Video URL"></v-text-field>
-                <v-card-text>
-                  What type of youtube video is this?
-                  <br />
-                  <v-radio-group v-model="videotype" :mandatory="true">
-                    <v-radio value="standard" label="Standard" />
+      <v-container fluid>
+        <v-row>
+          <v-col>
+            <v-card :color="color">
+              <v-card-title v-text="cultures.title"></v-card-title>
+              <v-card-text>
+                <v-row class="mb-4 question" v-for="(item) in paginatedDataCulture" :key="item.id">
+                  <p>
+                    <img
+                      class="delete"
+                      v-on:click="deleteCulture(item.id)"
+                      :src="require('../assets/delete.png')"
+                    />
+                    <span
+                      v-on:click="updateQuestions(item.name, 0)"
+                      v-on:hover="hoverCulture(item.name)"
+                    >{{item.name}}</span>
+                  </p>
+                </v-row>
+                <v-row v-show="pageCountCulture > 1">
+                  <v-col align="center">
+                    <button v-on:click="prevPageCulture" :disabled="pageNumberCulture==0">Previous</button>
+                    <span>- {{pageNumberCulture+1}} -</span>
+                    <button
+                      v-on:click="nextPageCulture"
+                      :disabled="pageNumberCulture >= pageCountCulture - 1"
+                    >Next</button>
+                  </v-col>
+                </v-row>
+                <v-form v-on:submit.prevent="onSubmitCulture">
+                  <v-text-field ref="culturename" width="25%" placeholder="Add New Culture"></v-text-field>
+                  <button>Add Culture</button>
+                </v-form>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col>
+            <v-card :color="color">
+              <v-card-title v-text="questions.title"></v-card-title>
+              <v-card-text>
+                <v-row class="mb-4 question" v-for="(item) in paginatedDataQuestion" :key="item.id">
+                  <p>
+                    <img
+                      class="delete"
+                      v-on:click="deleteQuestion(item.id)"
+                      :src="require('../assets/delete.png')"
+                    />
+                    <span v-on:click="updateResponse(item)">{{item.value}}</span>
+                  </p>
+                </v-row>
+                <v-row v-show="pageCountQuestion > 1">
+                  <v-col align="center">
+                    <button v-on:click="prevPageQuestion" :disabled="pageNumberQuestion==0">Previous</button>
+                    <span>- {{pageNumberQuestion+1}} -</span>
+                    <button
+                      v-on:click="nextPageQuestion"
+                      :disabled="pageNumberQuestion >= pageCountQuestion - 1"
+                    >Next</button>
+                  </v-col>
+                </v-row>
+                <v-form v-on:submit.prevent="onSubmitQuestion">
+                  <v-text-field ref="question" width="25%" placeholder="Question"></v-text-field>
+                  <v-text-field ref="text_answer" width="25%" placeholder="Text Answer"></v-text-field>
+                  <v-text-field ref="answerurl" width="25%" placeholder="Video URL"></v-text-field>
+                  <v-card-text>
+                    What type of youtube video is this?
                     <br />
-                    <v-radio value="threesixty" label="360" />
-                  </v-radio-group>
-                </v-card-text>
-                <button>Add Question</button>
-              </v-form>
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card :color="color">
-            <v-card-title v-text="responses.title"></v-card-title>
-            <v-card-text>Response: {{responses.data.text}}</v-card-text>
-            <v-card-text v-show="responses.video">Type: {{responses.data.videotype}}</v-card-text>
-            <v-card-text align="center">
-              <iframe
-                width="490"
-                height="275"
-                :src="responses.data.url"
-                frameborder="0"
-                allowfullscreen
-                v-show="responses.video"
-              ></iframe>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
+                    <v-radio-group v-model="videotype" :mandatory="true">
+                      <v-radio value="standard" label="Standard" />
+                      <br />
+                      <v-radio value="threesixty" label="360" />
+                    </v-radio-group>
+                  </v-card-text>
+                  <button>Add Question</button>
+                </v-form>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col>
+            <v-card :color="color">
+              <v-card-title v-text="responses.title"></v-card-title>
+              <v-card-text>Response: {{responses.data.text}}</v-card-text>
+              <v-card-text v-show="responses.video">Type: {{responses.data.videotype}}</v-card-text>
+              <v-card-text align="center">
+                <iframe
+                  width="490"
+                  height="275"
+                  :src="responses.data.url"
+                  frameborder="0"
+                  allowfullscreen
+                  v-show="responses.video"
+                ></iframe>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-container>
-  </v-container>
+  </v-app>
 </template>
 
 <script>
