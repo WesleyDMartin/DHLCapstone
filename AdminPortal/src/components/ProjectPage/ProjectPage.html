@@ -1,12 +1,16 @@
 <v-app id="inspire">
 
   <v-app-bar hide-on-scroll app color="rgb(51, 51, 51)" dark>
-    <v-toolbar-title>The Digital Human Library's Cultural Learning Tool</v-toolbar-title>
+    <router-link to="/" class="pr-6 pl-2">
+      <v-icon>mdi-home</v-icon>
+    </router-link>
+    
+    <v-toolbar-title left>The Digital Human Library's Cultural Learning Tool</v-toolbar-title>
 
     <v-spacer></v-spacer>
 
     <v-btn icon x-large href="https://digitalhumanlibrary.com" target="_blank">
-      <img height="39em" :src="require('../../assets/dhl-greyscale.png')" />
+      <img height="39em" :src="require('../../assets/dhl-logo.png')" />
     </v-btn>
     <v-btn icon x-large href="https://github.com/WesleyDMartin/DHLCapstone" target="_blank">
       <v-icon x-large color="#FFFFFF">mdi-github</v-icon>
@@ -20,37 +24,41 @@
     <v-container>
       <v-carousel v-show="showBanner" cycle hide-delimiter-background :show-arrows="true" height="30em">
         <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src">
-          <div class="carousel-div display-1">
+          <div class="carousel-div display-1" style="min-width: 540px;">
             {{item.text}}
           </div>
         </v-carousel-item>
       </v-carousel>
-      <v-container fluid>
+      <v-container>
         <v-row justify="space-between">
-          <v-col md="6" sm="12">
-            <v-row style="position:relative">
+          <v-col md="6" cols="12">
+            <v-row>
               <v-card-title class="display-2">The Project</v-card-title>
-              <p>This project evolved from the story where Leigh Cassel wanted to create a unique experience 
-                for the people which will allow them to learn about different cultures within the comfort of their own home. 
-                The experience will be provided in the virtual reality format. To be able to accomplish this unique experience,
-                 multiple technologies has been put together. <b>To assure everybody’s safety, no vibranium was used to build this 
-                 project. </b>
-                </p>
-              
-                 <div id="vid-wrapper">
-                <iframe width=100% height="100%" src="https://www.youtube.com/embed/92odeWKdl00" frameborder="0"
+              <p>This project evolved from Leigh Cassel's desire to create a unique experience
+                which will allow students to learn about different cultures from the safety of their own classroom.
+                Our goal is to provided a way to truly experience this learning in a Virtual Reality application. To be
+                able to accomplish this unique experience,
+                multiple different technologies have been brought together. To assure everybody’s safety, no vibranium
+                was used to build this
+                project.
+              </p>
+              <div id="vid-wrapper">
+                <iframe width=100% height="100%" src="https://www.youtube.com/embed/oyjurz0o14M" frameborder="0"
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen></iframe>
               </div>
               <p>
-                  With all jokes aside, the technologies that has been used to accomplish this project has been listed below.
-                 <li>The desktop application has been built on Unity where the virtual reality experience will be provided on oculus headset</li>
-                 <li>The communication between the user and the application has been supported by TensorFlow and Googles speech to text API in the backend</li>
-                 <li>The administration web portal has been built on rails for the backend and Vue for the front end</li>
+                With all jokes aside, the technologies that has been used to accomplish this project has been listed
+                below.
+                <li>The desktop application has been built on Unity where the virtual reality experience will be
+                  provided on oculus headset</li>
+                <li>The communication between the user and the application has been supported by TensorFlow and Googles
+                  speech to text API in the backend</li>
+                <li>The administration web portal has been built on rails for the backend and Vue for the front end</li>
               </p>
             </v-row>
           </v-col>
-          <v-col md="5" sm="12">
+          <v-col md="5" cols="12">
             <v-row>
               <v-card-title class="display-2">The Story</v-card-title>
               <p>
@@ -89,15 +97,15 @@
         <v-container fill-height fluid>
           <v-row justify="center">
             <v-col justify="center" sm="12" md="auto">
-              <v-btn x-large color="#1c76b8" href="https://digitalhumanlibrary.com" target="_blank" v-on="on">
+              <v-btn x-large color="white" href="https://digitalhumanlibrary.com" target="_blank" v-on="on">
                 <v-row class="center-bar-links">
                   <img height="50px" :src="require('../../assets/dhl-logo.png')" />
-                  <span class="pl-1 pr-5 headline">Digital Human Library</span>
+                  <span class="headline">Digital Human Library</span>
                 </v-row>
               </v-btn>
             </v-col>
             <v-col justify="center" sm="12" md="auto">
-              <v-btn x-large color="#1c76b8" href="https://github.com/WesleyDMartin/DHLCapstone" target="_blank"
+              <v-btn x-large color="white" href="https://github.com/WesleyDMartin/DHLCapstone" target="_blank"
                 v-on="on">
                 <v-row class="center-bar-links">
                   <v-icon size="50" color="#2B414D">mdi-github</v-icon>
@@ -106,7 +114,7 @@
               </v-btn>
             </v-col>
             <v-col justify="center" sm="12" md="auto">
-              <v-btn x-large color="#1c76b8" href="https://dhlconestogacapstone.atlassian.net/l/c/RH3DPimy"
+              <v-btn x-large color="white" href="https://dhlconestogacapstone.atlassian.net/l/c/RH3DPimy"
                 target="_blank" v-on="on">
                 <v-row class="center-bar-links" justify="center">
                   <img height="50px" :src="require('../../assets/confluence.png')" />
@@ -133,7 +141,7 @@
                 <v-card id="tech-detail" flat>
                   <v-row>
                     <v-col md="5" sm="12">
-                      <v-row>
+                      <v-row class="pl-3 pr-3">
                         <v-card-title>{{currentTechnology.tech}} </v-card-title>
                         <v-card-text>{{currentTechnology.description}}</v-card-text>
                         <v-card-text>{{currentTechnology.use}}</v-card-text>
@@ -164,18 +172,18 @@
               <v-card-title class="display-1">Our Team</v-card-title>
             </v-row>
             <v-row justify="center">
-              <v-col class="ma-n2" md="2" sm="12" min-width="200px">
+              <v-col class="ma-n2" md="2" cols="12">
                 <v-row v-for="(person, i) in people" :key="i">
                   <v-card hover @click="updatePerson(i)" class="techs ma-2" width="100%" flat>
                     <v-card-title>{{person.name}} </v-card-title>
                   </v-card>
                 </v-row>
               </v-col>
-              <v-col md="6" offset-md="-1" sm="12">
+              <v-col md="8" sm="12">
                 <v-card id="tech-detail" flat>
                   <v-row align-content="space-between">
                     <v-col md="5" sm="12">
-                      <v-row>
+                      <v-row class="pl-3 pr-3">
                         <v-card-title>{{currentPerson.name}} </v-card-title>
                         <v-card-text>{{currentPerson.role}}</v-card-text>
                       </v-row>
@@ -186,8 +194,9 @@
                         </v-btn>
                       </v-card-actions>
                     </v-col>
-                    <v-col md="7" sm="12" class="pt-0 pr-0 pb-0">
-                      <v-img class="white--text mr-3" align-self="stretch" :src="currentPerson.image"
+                    <v-col md="7" cols="12" class="pt-0 pr-0 pb-0">
+                      <v-img contain class="white--text mr-3" max-height="400px" ratio="1" align-self="stretch"
+                        :src="currentPerson.image"
                         style="border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
                       </v-img>
                     </v-col>
@@ -243,32 +252,5 @@
   </v-content>
   <v-footer color="rgb(51, 51, 51)" app>
     <span class="white--text">&copy; 2019</span>
-    <!-- <v-row align="center" justify="center">
-      <v-tooltip right>
-        <template v-slot:activator="{ on }">
-          <v-btn icon x-large href="https://digitalhumanlibrary.com" target="_blank" v-on="on">
-            <img height="39em" :src="require('../../assets/dhl-logo.png')" />
-          </v-btn>
-        </template>
-        <span>Digital Human Library</span>
-      </v-tooltip>
-      <v-tooltip right>
-        <template v-slot:activator="{ on }">
-          <v-btn icon x-large href="https://github.com/WesleyDMartin/DHLCapstone" target="_blank" v-on="on">
-            <v-icon x-large color="#2B414D">mdi-github</v-icon>
-          </v-btn>
-        </template>
-        <span>GitHub</span>
-      </v-tooltip>
-      <v-tooltip right>
-        <template v-slot:activator="{ on }">
-          <v-btn icon x-large href="https://dhlconestogacapstone.atlassian.net/l/c/RH3DPimy" target="_blank"
-            v-on="on">
-            <img height="39em" :src="require('../../assets/confluence.png')" />
-          </v-btn>
-        </template>
-        <span>Confluence Documentation</span>
-      </v-tooltip>
-    </v-row> -->
   </v-footer>
 </v-app>

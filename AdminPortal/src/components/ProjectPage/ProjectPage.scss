@@ -26,6 +26,11 @@
     background-color: rgb(241,152,51);
 }
 
+.btn-link {
+    padding: 10px;
+    margin: 10px;
+}
+
 #vid-wrapper{
     float: right;
     width: 100%;
@@ -37,7 +42,12 @@
     background-color: #1c76b8;
     margin-left: calc(50% - 50vw);
     width: 100vw;
-height: 100px;
+    height: 100px;
+}
+
+.logo-link {
+    background-color: white;
+    float: left;
 }
 
 .center-bar-links {

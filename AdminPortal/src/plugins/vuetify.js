@@ -5,6 +5,7 @@ Vue.use(Vuetify);
 
 const MY_ICONS = {
     dhl: 'AdminPortal/src/assets/dhl-logo.png'
+    
 }
 
 export default new Vuetify({

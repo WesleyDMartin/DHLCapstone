@@ -101,6 +101,18 @@ export default {
       ],
       people: [
         {
+          name: "Leigh",
+          role: "Leight Cassell is the founder and organizer of the Digital Human Library. She is behind the ideas for this project, and has been guiding it along since it began in the Fall of 2019. Leigh is an Apple Distinguished Educator, Microsoft Innovative Educator, Google Certified Educator, SMART Certified Interactive Teacher, and a Founding Partner of Live Learning Canada",
+          links: [{
+            value: "LinkedIn",
+            url: "https://www.linkedin.com/in/leigh-cassell/"
+          }, {
+            value: "Website",
+            url: "https://leighcassell.com/"
+          }],
+          image: "https://media-exp1.licdn.com/dms/image/C5603AQFgRnVJM9Zmjg/profile-displayphoto-shrink_200_200/0?e=1593043200&v=beta&t=cm1MjfIDGD1-LPCXQB-Mbab7ojNfa3BHj_YN0Py3Wpg"
+        },
+        {
           name: "Wes",
           role: "Wes was the Project Lead, and was primarily responsible for the Unity and Oculus development, which included ingegration with Google APIs and the TensorFlow project complete by Ricardo. Wes was also responsible for the backend of the Administrative Portal API.",
           links: [{
