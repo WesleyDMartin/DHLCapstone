@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Digital Human Library : Amazon</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Digital Human Library</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Introduction_33020.html">Introduction</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Initial-Research_2654225.html">Initial Research</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Digital Human Library : Amazon
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Wesley Martin</span>, last modified by <span class='editor'> Humaira Siddiqa</span> on Jan 28, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>As this is a new project, these articles will be changing rapidly. For more details on the Digital Human Library project, please visit <a href="https://www.digitalhumanlibrary.org/" class="external-link" rel="nofollow">the Digital Human Library</a></p></div></div><h1 id="Amazon-AmazonWebServices">Amazon Web Services</h1><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1587584215073 {padding: 0px;}
+div.rbtoc1587584215073 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1587584215073 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1587584215073'>
+<ul class='toc-indentation'>
+<li><a href='#Amazon-AmazonWebServices'>Amazon Web Services</a>
+<ul class='toc-indentation'>
+
+<ul class='toc-indentation'>
+<li><a href='#Amazon-Summary'>Summary</a></li>
+<li><a href='#Amazon-ResearchDetails'>Research Details</a></li>
+<li><a href='#Amazon-Costs'>Costs</a></li>
+<li><a href='#Amazon-Security'>Security</a></li>
+<li><a href='#Amazon-Workflow'>Workflow</a></li>
+</ul>
+<li><a href='#Amazon-RelatedTickets'>Related Tickets</a></li>
+<li><a href='#Amazon-RelatedArticles'>Related Articles</a></li>
+</ul>
+</li>
+</ul>
+</div><h3 id="Amazon-Summary">Summary</h3><p>This article summarizes the research performed into the Amazon Web Services APIs, and how they will assist and work with our project.</p><p /><p>AWS Rekognition is an image analysis and recognition software which is built on top of deep learning technology. This is an AI system which is used to analyze and recognize images. AWS recognition has all the deep learning technologies that is available without having to learn any of the deep learning technologies.</p><p> </p><p>AWS recognition was released in 2016 which was the first cloud image analysis service by amazon. It makes image processing easier for developers. It can do face comparison, provide a description, can estimate the age of a person, detect objects like grass, tree, etc. It can also detect the text if there is any in an image.</p><p /><p>For the DHL project, AWS is one of the platform that has been investigated as one of the potential solution that will aid users to identify an image, text, object etc. AWS is one of the largest AI platform that offers multiple solutions such as Deep learning, Natural language process, image recognition, etc. One of the beauty of using AWS’s platform is that the user will not have to learn machine learning or deep learning. </p><hr/><h3 id="Amazon-ResearchDetails">Research Details</h3><p>For this research, different youtube tutorials and documentations has been followed. The findings has been described below. </p><p>AWS is a fully managed and continuously trained NLP service. In order to use AWS’s image recognition service, the user will have to create an account in AWS and setup the appropriate service, S3 bucket for storage, cloud watch for cloud notification and monitoring, and SNS to trigger an email notification as soon as an image has been detected.</p><p>The image detection gets done via the Lambda function which uses python as its primary language. For image recognition for an example, there is a library called Boto3. It has different function written for convenience. All the user has to do is select the right function and apply it to the Lambda function. The link to the documentation/library has been provided below.</p><p><a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.publish" class="external-link" rel="nofollow">https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.publish</a></p><p /><p>When it comes to recognizing the text from an image or anything, AWS uses Natural language process. This service is known as Amazon Comprehend. This service analyzes the unstructured text data using NLP. This allows the user to perform tasks like language detection which is capable of detecting up to 100 languages. One of the use cases in DHL is that when a uses is experiencing a virtual tour, and he/she come across a sign in a different language and would like to know what it means, he/she will be able to use the Amazon Comprehend service to run a analysis on that language.</p><h3 id="Amazon-Costs">Costs</h3><p>AWS allows the user to have a free account with some limitations. The account stays free for 12 months and the Image rekognition service does not cost anything. However, it allows the user to be able to analyze only 5000 images per month and store only 1000 pieces of face metadata per month. This seems like more than enough at this point for the team DHL to carry out the research project. The breakdown after that has been provided below. </p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/2654319/6848578.png" data-image-src="attachments/2654319/6848578.png" data-height="384" data-width="986" data-unresolved-comment-count="0" data-linked-resource-id="6848578" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2020-01-27 at 11.17.59 PM.png" data-base-url="https://dhlconestogacapstone.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="2654319" data-linked-resource-container-version="3" data-media-id="f84fc513-05f1-4e73-8abc-cf648667d6b7" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/2654319/2654478.png" data-image-src="attachments/2654319/2654478.png" data-height="365" data-width="966" data-unresolved-comment-count="0" data-linked-resource-id="2654478" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2020-01-27 at 11.18.26 PM.png" data-base-url="https://dhlconestogacapstone.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="2654319" data-linked-resource-container-version="3" data-media-id="395e1165-9054-4a9e-9852-162c401d9dae" data-media-type="file"></span><p /><h3 id="Amazon-Security">Security</h3><p>It is safe to assume that, AWS’s cloud platform will be secure enough for DHL to use their image rekognition service. However, it is highly recommended to look into the security aspect of it a bit more.</p><p /><h3 id="Amazon-Workflow">Workflow</h3><p><br/></p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/2654319/2654491.png" data-image-src="attachments/2654319/2654491.png" data-height="569" data-width="831" data-unresolved-comment-count="0" data-linked-resource-id="2654491" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2020-01-28 at 12.20.08 AM.png" data-base-url="https://dhlconestogacapstone.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="2654319" data-linked-resource-container-version="3" data-media-id="7bd3cbaa-4a99-444c-834c-b941e59c5856" data-media-type="file"></span><p><br/></p><p /><hr/><h2 id="Amazon-RelatedTickets">Related Tickets</h2>
+
+
+
+
+
+
+
+
+    
+
+            
+
+
+
+<div id="refresh-module-1815508679" class="confluence-jim-macro refresh-module-id jira-table" >
+    <p>
+       
+                
+        
+                
+        <div id="jira-issues-1815508679" style="width: 100%;  overflow: auto;" class="jira-issues">
+            <table class="aui" >
+                <tbody>
+                <tr></tr>                 <tr>
+                                                                          
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Key</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Summary</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">T</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Created</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Updated</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Due</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Assignee</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Reporter</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">P</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Status</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Resolution</span></th>
+                                                                                          </tr>
+                
+                                                                                                                                        <tr class="rowNormal">
+                                                                                                                                        <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <a href="https://dhlconestogacapstone.atlassian.net/browse/DHLCAP-12?src=confmacro">DHLCAP-12</a>
+                                                                            </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    <a href="https://dhlconestogacapstone.atlassian.net/browse/DHLCAP-12?src=confmacro">
+                                                Investigate tool suite for Watson
+                                            </a>
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <a href="https://dhlconestogacapstone.atlassian.net/browse/DHLCAP-12?src=confmacro"><img src="https://dhlconestogacapstone.atlassian.net/secure/viewavatar?size=medium&amp;avatarId=10315&amp;avatarType=issuetype" alt="Story" class="icon" /></a>
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    Jan 21, 2020 11:38
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    Jan 21, 2020 11:38
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    
+                                                                            </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    Unassigned
+                                                                            </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    Wesley Martin
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <img src="https://dhlconestogacapstone.atlassian.net/images/icons/priorities/medium.svg" alt="Medium" class="icon" />
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <!-- The new status lozengens support for JIRA 6.2 or later. Otherwise we use the icon.-->
+                                                                                                                                                                                            <span class="aui-lozenge aui-lozenge-subtle aui-lozenge-complete">
+                                                    To Do
+                                                </span>
+                                                                                                                        </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    Unresolved
+                                                                            </td>
+                                                            </tr>
+                                                                                                                                                                                <tr class="rowAlternate">
+                                                                                                                                        <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <a href="https://dhlconestogacapstone.atlassian.net/browse/DHLCAP-5?src=confmacro">DHLCAP-5</a>
+                                                                            </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    <a href="https://dhlconestogacapstone.atlassian.net/browse/DHLCAP-5?src=confmacro">
+                                                Investigate tool suite for Amazon Web Services
+                                            </a>
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <a href="https://dhlconestogacapstone.atlassian.net/browse/DHLCAP-5?src=confmacro"><img src="https://dhlconestogacapstone.atlassian.net/secure/viewavatar?size=medium&amp;avatarId=10315&amp;avatarType=issuetype" alt="Story" class="icon" /></a>
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    Jan 19, 2020 14:03
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    Jan 28, 2020 11:34
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    
+                                                                            </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    Humaira Siddiqa
+                                                                            </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    Wesley Martin
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <img src="https://dhlconestogacapstone.atlassian.net/images/icons/priorities/medium.svg" alt="Medium" class="icon" />
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <!-- The new status lozengens support for JIRA 6.2 or later. Otherwise we use the icon.-->
+                                                                                                                                                                                            <span class="aui-lozenge aui-lozenge-subtle aui-lozenge-success">
+                                                    Done
+                                                </span>
+                                                                                                                        </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    Done
+                                                                            </td>
+                                                            </tr>
+                                                                                                                                                        </tbody>
+            </table>
+        </div>
+                    <div class="refresh-issues-bottom">
+                                    <span id="total-issues-count" class="total-issues-count">
+                                                                                <a rel="nofollow" title="View all matching issues in JIRA." href="https://dhlconestogacapstone.atlassian.net/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels%3Damazon+&amp;src=confmacro">
+                                                                    2 issues
+                                                        </a>
+                                            </span>
+                                            </div>
+            </p>
+
+    
+</div>
+<h2 id="Amazon-RelatedArticles">Related Articles</h2><ul><li><p><a href="Initial-Research_2654225.html" data-linked-resource-id="2654225" data-linked-resource-version="6" data-linked-resource-type="page">Initial Research</a> </p></li></ul><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2654319/6848578.png">Screen Shot 2020-01-27 at 11.17.59 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2654319/2654478.png">Screen Shot 2020-01-27 at 11.18.26 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2654319/6848592.pdf">AWS Image Rekognition.pdf</a> (application/pdf)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2654319/2654491.png">Screen Shot 2020-01-28 at 12.20.08 AM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 22, 2020 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

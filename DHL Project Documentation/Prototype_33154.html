@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Digital Human Library : Prototype</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Digital Human Library</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Introduction_33020.html">Introduction</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Digital Human Library : Prototype
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Wesley Martin</span>, last modified on Jan 31, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>As this is a new project, these articles will be changing rapidly. For more details on the Digital Human Library project, please visit <a href="https://www.digitalhumanlibrary.org/" class="external-link" rel="nofollow">the Digital Human Library</a></p></div></div><h1 id="Prototype-Prototype">Prototype</h1><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1587584217278 {padding: 0px;}
+div.rbtoc1587584217278 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1587584217278 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1587584217278'>
+<ul class='toc-indentation'>
+<li><a href='#Prototype-Prototype'>Prototype</a>
+<ul class='toc-indentation'>
+
+<ul class='toc-indentation'>
+<li><a href='#Prototype-Summary'>Summary</a></li>
+<li><a href='#Prototype-PrototypeAIRoadmap'>Prototype AI Road map</a></li>
+<li><a href='#Prototype-PrototypePurpose'>Prototype Purpose</a></li>
+</ul>
+<li><a href='#Prototype-RelatedTickets'>Related Tickets</a></li>
+<li><a href='#Prototype-RelatedArticles'>Related Articles</a></li>
+</ul>
+</li>
+</ul>
+</div><h3 id="Prototype-Summary">Summary</h3><p>Outline the reasoning and design of the prototype, its current status, and the results, once found</p><hr/><p>The initial prototype for our project is going to be a slimmed down, but functional version of the complete project. We plan to implement a text based version of our <a href="Conversational-Interface-Research_14745614.html" data-linked-resource-id="14745614" data-linked-resource-version="1" data-linked-resource-type="page">Conversational Interface Research</a>, and a strictly 2D, non immersive version of the video question responses.</p><h3 id="Prototype-PrototypeAIRoadmap">Prototype AI Road map</h3><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="340" src="attachments/33154/14712869.png?width=340" data-image-src="attachments/33154/14712869.png" data-height="1733" data-width="1613" data-unresolved-comment-count="0" data-linked-resource-id="14712869" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="AI Workflow.png" data-base-url="https://dhlconestogacapstone.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33154" data-linked-resource-container-version="4" data-media-id="e3dee41c-3ca2-4606-a14e-8efb5e6bae05" data-media-type="file"></span><p /><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Below this point is expired, but still potentially useful research</p></div></div><h3 id="Prototype-PrototypePurpose">Prototype Purpose</h3><p>The purpose of the prototype is not to represent a version of the final version, at least not now. Rather, this prototypes main purpose is to test, compare, and contrast the APIs of the platforms we are considering for the final product. The information regarding that research and decision making can be found in <a href="Initial-Research_2654225.html" data-linked-resource-id="2654225" data-linked-resource-version="6" data-linked-resource-type="page">Initial Research</a>. </p><p>The prototype will be a C# application which will be able to generalize the calls to each API endpoint, making image/text analysis requests with identical images, parsing the JSON results, and then comparing the outputs.</p><p>As we will be developing the test application in C#, it makes sense to track the various API libraries that will be able to run natively in C# and communicate with the endpoints.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 111.0px;"/><col style="width: 198.0px;"/><col style="width: 371.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Platform</strong></p></th><th class="confluenceTh"><p><strong>API</strong></p></th><th class="confluenceTh"><p><strong>Link</strong></p></th></tr><tr><td class="confluenceTd"><p>Azure</p></td><td class="confluenceTd"><p>Computer Vision</p></td><td class="confluenceTd"><p><a href="https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/quickstarts-sdk/csharp-sdk" class="external-link" rel="nofollow">https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/quickstarts-sdk/csharp-sdk</a></p></td></tr><tr><td class="confluenceTd"><p /></td><td class="confluenceTd"><p>Text Analytics</p></td><td class="confluenceTd"><p><a href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/text-analytics-sdk?pivots=programming-language-csharp" class="external-link" rel="nofollow">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/text-analytics-sdk?pivots=programming-language-csharp</a></p></td></tr><tr><td class="confluenceTd"><p>Google</p></td><td class="confluenceTd"><p /></td><td class="confluenceTd"><p /></td></tr><tr><td class="confluenceTd"><p>AWS</p></td><td class="confluenceTd"><p /></td><td class="confluenceTd"><p /></td></tr></tbody></table></div><hr/><h2 id="Prototype-RelatedTickets">Related Tickets</h2>
+
+
+
+
+
+
+
+
+    
+
+            
+
+
+
+<div id="refresh-module-1023670682" class="confluence-jim-macro refresh-module-id jira-table" >
+    <p>
+       
+                
+        
+                
+        <div id="jira-issues-1023670682" style="width: 100%;  overflow: auto;" class="jira-issues">
+            <table class="aui" >
+                <tbody>
+                <tr></tr>                 <tr>
+                                                                          
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Key</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Summary</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">T</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Created</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Updated</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Due</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Assignee</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Reporter</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">P</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Status</span></th>
+                                                                                                                                
+                                                              <th style="text-align: left; text-transform: capitalize;" class="jira-macro-table-underline-pdfexport jira-tablesorter-header"><span class="jim-table-header-content">Resolution</span></th>
+                                                                                          </tr>
+                
+                                                                                                                                        <tr class="rowNormal">
+                                                                                                                                        <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <a href="https://dhlconestogacapstone.atlassian.net/browse/DHLCAP-14?src=confmacro">DHLCAP-14</a>
+                                                                            </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    <a href="https://dhlconestogacapstone.atlassian.net/browse/DHLCAP-14?src=confmacro">
+                                                Create Google API C# Testing Application
+                                            </a>
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <a href="https://dhlconestogacapstone.atlassian.net/browse/DHLCAP-14?src=confmacro"><img src="https://dhlconestogacapstone.atlassian.net/secure/viewavatar?size=medium&amp;avatarId=10315&amp;avatarType=issuetype" alt="Story" class="icon" /></a>
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    Jan 21, 2020 11:41
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    Mar 22, 2020 11:11
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    
+                                                                            </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    Ricardo Mohammed
+                                                                            </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    Ricardo Mohammed
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <img src="https://dhlconestogacapstone.atlassian.net/images/icons/priorities/medium.svg" alt="Medium" class="icon" />
+                                                                            </td>
+                                                                    <td nowrap="true" class="jira-macro-table-underline-pdfexport" >
+                                                                                    <!-- The new status lozengens support for JIRA 6.2 or later. Otherwise we use the icon.-->
+                                                                                                                                                                                            <span class="aui-lozenge aui-lozenge-subtle aui-lozenge-success">
+                                                    Done
+                                                </span>
+                                                                                                                        </td>
+                                                                    <td  class="jira-macro-table-underline-pdfexport" >
+                                                                                    Done
+                                                                            </td>
+                                                            </tr>
+                                                                                                                                                        </tbody>
+            </table>
+        </div>
+                    <div class="refresh-issues-bottom">
+                                    <span id="total-issues-count" class="total-issues-count">
+                                                                                <a rel="nofollow" title="View all matching issues in JIRA." href="https://dhlconestogacapstone.atlassian.net/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels%3Dprototype+&amp;src=confmacro">
+                                                                    1 issue
+                                                        </a>
+                                            </span>
+                                            </div>
+            </p>
+
+    
+</div>
+<h2 id="Prototype-RelatedArticles">Related Articles</h2><ul><li><p><a href="Initial-Research_2654225.html" data-linked-resource-id="2654225" data-linked-resource-version="6" data-linked-resource-type="page">Initial Research</a> </p></li></ul><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33154/14712869.png">AI Workflow.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 22, 2020 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
