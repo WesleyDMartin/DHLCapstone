@@ -1,7 +1,11 @@
 <v-app id="inspire">
 
   <v-app-bar hide-on-scroll app color="rgb(51, 51, 51)" dark>
-    <v-toolbar-title>The Digital Human Library's Cultural Learning Tool</v-toolbar-title>
+    <router-link to="/" class="pr-6 pl-2">
+      <v-icon>mdi-home</v-icon>
+    </router-link>
+    
+    <v-toolbar-title left>The Digital Human Library's Cultural Learning Tool</v-toolbar-title>
 
     <v-spacer></v-spacer>
 
@@ -30,23 +34,27 @@
           <v-col md="6" cols="12">
             <v-row>
               <v-card-title class="display-2">The Project</v-card-title>
-              <p>This project evolved from Leigh Cassel's desire to create a unique experience 
-                which will allow students to learn about different cultures from the safety of their own classroom. 
-                Our goal is to provided a way to truly experience this learning in a Virtual Reality application. To be able to accomplish this unique experience,
-                 multiple different technologies have been brought together. To assure everybody’s safety, no vibranium was used to build this 
-                 project.
-                </p>
-                 <div id="vid-wrapper">
-                   <b>Powerpoint clipped the demo audio. To view a demo with proper in world audio please click <a href="https://www.youtube.com/watch?v=ClgHVV4obsY">here</a></b> 
-                <iframe width=100% height="100%" src="https://www.youtube.com/embed/JtnfcgvlY5w" frameborder="0"
+              <p>This project evolved from Leigh Cassel's desire to create a unique experience
+                which will allow students to learn about different cultures from the safety of their own classroom.
+                Our goal is to provided a way to truly experience this learning in a Virtual Reality application. To be
+                able to accomplish this unique experience,
+                multiple different technologies have been brought together. To assure everybody’s safety, no vibranium
+                was used to build this
+                project.
+              </p>
+              <div id="vid-wrapper">
+                <iframe width=100% height="100%" src="https://www.youtube.com/embed/oyjurz0o14M" frameborder="0"
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen></iframe>
               </div>
               <p>
-                  With all jokes aside, the technologies that has been used to accomplish this project has been listed below.
-                 <li>The desktop application has been built on Unity where the virtual reality experience will be provided on oculus headset</li>
-                 <li>The communication between the user and the application has been supported by TensorFlow and Googles speech to text API in the backend</li>
-                 <li>The administration web portal has been built on rails for the backend and Vue for the front end</li>
+                With all jokes aside, the technologies that has been used to accomplish this project has been listed
+                below.
+                <li>The desktop application has been built on Unity where the virtual reality experience will be
+                  provided on oculus headset</li>
+                <li>The communication between the user and the application has been supported by TensorFlow and Googles
+                  speech to text API in the backend</li>
+                <li>The administration web portal has been built on rails for the backend and Vue for the front end</li>
               </p>
             </v-row>
           </v-col>
@@ -174,7 +182,7 @@
               <v-col md="8" sm="12">
                 <v-card id="tech-detail" flat>
                   <v-row align-content="space-between">
-                    <v-col  md="5" sm="12">
+                    <v-col md="5" sm="12">
                       <v-row class="pl-3 pr-3">
                         <v-card-title>{{currentPerson.name}} </v-card-title>
                         <v-card-text>{{currentPerson.role}}</v-card-text>
@@ -187,7 +195,8 @@
                       </v-card-actions>
                     </v-col>
                     <v-col md="7" cols="12" class="pt-0 pr-0 pb-0">
-                      <v-img contain class="white--text mr-3" max-height="400px" ratio="1" align-self="stretch" :src="currentPerson.image"
+                      <v-img contain class="white--text mr-3" max-height="400px" ratio="1" align-self="stretch"
+                        :src="currentPerson.image"
                         style="border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
                       </v-img>
                     </v-col>
