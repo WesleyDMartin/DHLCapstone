@@ -46,4 +46,22 @@ public class ShowHelp : MonoBehaviour, IPointerClickHandler
     {
         
     }
+
+    public static string fileName = "Editor_Screenshot_";
+    public static int startNumber = 1;
+    
+    void TakeScreenshot()
+    {
+        int number = startNumber;
+        string name = "" + number;
+
+        while (System.IO.File.Exists(fileName + name + ".png"))
+        {
+            number++;
+            name = "" + number;
+        }
+
+        startNumber = number + 1;
+        ScreenCapture.CaptureScreenshot(fileName + name + ".png");
+    }
 }
